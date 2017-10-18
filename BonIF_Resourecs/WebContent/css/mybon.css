@@ -1,0 +1,158 @@
+/* tab-container */
+.mybon{margin-bottom:6rem}
+.mybon .tabs {overflow:hidden;border:0}
+.mybon .tabs li{float: left; text-align:center;width:25%; height:4rem; line-height:4rem; border:1px solid #ccc;border-left:0;font-size:1.3rem;color:#666}
+.mybon .tabs li:first-child{border-left:1px solid #ccc}
+.mybon .tabs li.active{ position: relative;background: #222;border:1px solid #222;color:#fff }
+.mybon .tabs li a{display:block}
+.mybon .tabs_2 {overflow:hidden;border:0}
+.mybon .tabs_2 li{float: left; text-align:center;width:50%;height:4rem; line-height:4rem; border:1px solid #ccc;border-left:0;font-size:1.3rem;color:#666}
+.mybon .tabs_2 li:first-child{border-left:1px solid #ccc}
+.mybon .tabs_2 li.active{ position: relative;background: #222;border:1px solid #222;color:#fff }
+.mybon .tabs_2 li a{display:block}
+.mybon .tab_content {display: none}
+.mybon .tab_container .tab_content ul {width:100%; margin:0px; padding:0px}
+.mybon .tab_container .tab_content ul li{padding:5px; list-style:none}
+.mybon .search_area{position:relative;height:4rem;padding-right:11rem}
+.mybon .search_area .date_srch{width:100%}
+.mybon .search_area .date_srch .input_text{float:left;width:45%;padding:0;border:0}
+.mybon .search_area .date_srch .input_text:last-child{float:right}
+.mybon .search_area .date_srch .input_text input{padding:0 0 0 0.5rem;height:4rem;line-height:4rem;border:1px solid #ccc}
+.mybon .search_area .hyphen{float:left;width:10%;text-align:center;line-height:4rem;padding:0 0.5rem}
+.mybon .search_area .btn_srch{right:5.3rem}
+.mybon .search_area .btn_cancel{position:absolute;right:0;top:0;border:1px solid #ccc;width:5rem;height:4rem;line-height:3.3;background-color:#f1f1f1}
+.mybon .tab_container .tab_content table,
+.mybon .tab_container .tab_content table thead,
+.mybon .tab_container .tab_content table tbody,
+.mybon .tab_container .tab_content table tfoot {width:100%}
+.mybon .tab_container .tab_content .paging{margin:0;padding:0}
+
+/*  .order-chk */
+.mybon .order-chk {padding:2.5rem 0 1.3rem;border:5px solid #d0d0d0;text-align:center;background:#fcfcfc}
+.mybon .order-chk li{margin-bottom:1.7rem}
+.mybon .order-chk > p {font-size:1.8rem}
+.mybon .order-chk li p{margin-top:0.7rem;font-weight:300}
+
+/*  .order-view */
+.mybon .order-view{position:relative;background:#fcfcfc;border:1px solid #cccccc;padding:1.2rem 9.7rem 0 1.5rem;min-height:4rem}
+.mybon .order-view .tit{padding-right:1rem}
+.mybon .order-view .check-spen{position:absolute;right:1.5rem;top:0.7rem}
+
+/* check-spen */
+.check-spen{display:inline-block;width:7.2rem;height:2.5rem;line-height:1.8;text-align:center;font-size:1.3rem;border:1px solid #cccccc;background:#fff}
+/* 2017.07.24. Monochrome ADD */
+.check-topspen{display:inline-block;width:10rem;height:2.5rem;line-height:1.8;text-align:center;font-size:1.3rem;border:1px solid #cccccc;background:#fff;margin-bottom: 0.7rem;}
+.t-white {color:#000}
+.t-green {color:#60a224}
+.t-orange {color:#f29700}
+.t-gray {color:#888888}
+.t-white-on {background:#fff;border:1px solid #cccccc;color:#000}
+.t-green-on {background:#60a224;border:1px solid #60a224;color:#fff}
+.t-orange-on {background:#f29700;border:1px solid #f29700;color:#fff}
+.t-gray-on {background:#888888;border:1px solid #888888;color:#fff}
+
+/* common  */
+.mb40 {margin-bottom:2rem}
+.mb80 {margin-bottom:4rem}
+.ptb40 {padding:2rem 0}
+.ip10 {padding-left: 0.5rem}
+
+/* table */
+.mybon table tfoot th,.mybon table tfoot td{font-weight:500}
+form .mybon table .custom-chkbox span.checkbox{margin-left:0;margin-right:0.625rem}
+
+/* coupon_info */
+.coupon_info{padding:1.9rem}
+.coupon_info .star_list li{margin-top:1rem}
+
+/* mycoupon_box */
+.mycoupon_box{border:1px solid #ccc}
+.mycoupon_box li{float:left;width:50%;text-align:center}
+.mycoupon_box li.fullbox{float:none;width:100%;}
+.mycoupon_box li .inner{border-left:1px solid #ccc}
+.mycoupon_box li .tit{display:block;height:4.2rem;line-height:3.4;background:#f9f9f9}
+.mycoupon_box li:first-child .inner{border-left:0}
+.mycoupon_box li .cont{display:block;height:4.5rem;line-height:2.6;font-weight:300}
+.mycoupon_box li .cont .f34{font-weight:400}
+
+
+/* popup giftbon */
+.popup_area.giftbon .contents{/*width:30rem*/}
+.popup_area.giftbon .contents .category-nav + .message_box{margin-top:-1rem}
+.popup_area.giftbon .contents .message_box{padding:1rem 0;margin-bottom:2rem;height:15.7rem;border:1px solid #ccc}
+.popup_area.giftbon .contents .message_box textarea{border:0}
+
+/* coupon_list */
+.mybon .coupon_list .box{position:relative;margin-top:2rem;border:1px solid #ccc}
+.mybon .coupon_list .box.center{text-align:center}
+.mybon .coupon_list .box.center .fin_label{position:absolute;top:0;left:0;width:6.65rem;height:3.2rem;line-height:3.2rem;background:#60a224;color:#fff;font-size:1.3rem}
+.mybon .coupon_list .box img{height:13.3rem;max-height:100%;}
+.mybon .coupon_list .coupon{margin:1.5rem;height:13.3rem;border:6px solid #872728;background:url('/img/_dummy/coupon_bg.png') center right no-repeat;background-size:contain}
+.mybon .coupon_list .coupon a{display:block;height:12.4rem;padding-top:1rem}
+.mybon .coupon_list .coupon a .cp_tit {font-size:/*18px;*/1.286rem;color:#666}
+.mybon .coupon_list .coupon a .cp_promo {font-size:/*28px*/2rem;font-weight:500;height:/*64px*/4.571rem;line-height:/*64px*/4.571rem}
+.mybon .coupon_list .coupon a .cp_promo span {font-size:/*56px*/4rem;font-weight:800;margin-right:/*7px*/0.5rem}
+.mybon .coupon_list .coupon a .cp_subtxt {font-size:/*15px*/1.071rem;color:#999}
+.mybon .coupon_list .coupon a .color_red {color:#955762}
+
+.mybon .coupon_list .use_date_area {text-align:left;border-top:1px solid #ddd;border-bottom:1px dashed #ddd;padding:0.9rem 0 0.9rem 1.1rem;}
+.mybon .coupon_list .use_date_area .text{font-size:1rem;line-height:1.7rem;color:#a0a0a0;}
+.mybon .coupon_list .use_date_area .date{font-size:1.2rem;line-height:1.7rem;color:#222;}
+.mybon .coupon_list .down_area{padding:1rem 0;font-size:0}
+.mybon .coupon_list .down_area a{display:inline-block;font-size:1.2rem;line-height:1;}
+.mybon .coupon_list .down_area .down_btn{padding-left:1.5rem;background:url('/img/common/download_icon.png') center left no-repeat;background-size:contain;}
+
+/* popup mycoupon */
+.my_coupon{background:#fff;text-align: center;overflow-y:auto;}
+
+/* point_status table */
+.mybon .point_status th,.mybon .point_status td{padding:1.4rem 1rem 1.15rem}
+.mybon .point_status .nowrap{white-space:nowrap}
+.mybon .point_status .f_red{background:#f9f9f9}
+
+/* giftcard */
+.img_giftcard{display:inline-block;margin:2.5rem 0;width:20rem;height:14rem}
+
+/* 본포인트카드 > 포인트 상세내역 */
+.mybon .my_level{border:1px solid #ccc}
+.mybon .my_level .top_content{display:table;width:100%}
+.mybon .my_level .level{float:left;width:30%;padding-top:2rem;text-align:center}
+.mybon .my_level .level div{display:inline-block;width:5.4rem;height:5.6rem}
+.mybon .my_level .friend{background:url(../img/common/ico_level01.png) no-repeat 0 0;background-size:contain}
+.mybon .my_level .family{background:url(../img/common/ico_level02.png) no-repeat 0 0;background-size:contain}
+.mybon .my_level .vip{background:url(../img/common/ico_level03.png) no-repeat 0 0;background-size:contain}
+.mybon .my_level .content{overflow:hidden;border-left:1px solid #ccc;height:10rem;padding-top:2.2rem;text-align:center}
+.mybon .my_level .content .txt{font-size:1.4rem;height:3.6rem}
+.mybon .my_level .content .point_color{display:inline-block;color:#a7c12b}
+.mybon .my_level .content .bg_gray{padding:0.6rem 1rem;font-weight:300}
+.mybon .my_level .barcode_area{padding:2rem 0;border-top:1px solid #ccc;text-align:center}
+.mybon .my_level .barcode_area img{width:20.3rem;height:8.3rem}
+.mybon .mypoint_box{border-bottom:1px solid #ccc;border-top:2px solid #222}
+.mybon .mypoint_box .box{float:left;width:50%;padding:2rem 0;text-align:center}
+.mybon .mypoint_box .box:first-child{border-right:1px solid #ccc}
+.mybon .mypoint_box .box .tit{display:inline-block;position:relative;white-space:nowrap;padding-right:2rem;margin-bottom:1rem}
+.mybon .mypoint_box .btn_help{position:absolute;right:0;top:0.1rem;width:1.5rem;height:1.5rem;background:url(../img/mybon/btn_help.png) no-repeat 0 0;background-size:contain}
+.mybon .mypoint_box .box .popup_help{display:none;position:absolute;right:0;top:2rem;border:3px solid #222;padding:1rem 1.5rem 1.3rem;text-align:left;background:#fff}
+.mybon .mypoint_box .box .popup_help .tit{margin-bottom:0;font-size:1.4rem}
+.mybon .mypoint_box .box .popup_help .text{margin-top:0.5rem;font-weight:300}
+.mybon .graybd_area{position:relative;padding:79px 0 80px;text-align:center;border:1px solid #ccc}
+.point_status .f_green{padding:0 0.2rem}
+
+/* card_slider */
+.mybon .card_slider{margin-top:0.3rem;padding:2rem 0;background:#fcfcfc}
+.mybon .card_slider .orbit-container{height:14.8rem}
+.mybon .card_slider button{top:7rem;padding:0;width:3.4rem;height:3.7rem;background-position:0 0;background-repeat:no-repeat;background-size:contain}
+.mybon .card_slider button:hover{background:none}
+.mybon .card_slider button.orbit-previous{left:-1rem;background-image:url('../img/mybon/slider_prev.png')}
+.mybon .card_slider button.orbit-next{right:-1rem;background-image:url('../img/mybon/slider_next.png')}
+.mybon .card_slider li .orbit-img{width:100%;text-align:center}
+.mybon .card_slider li .orbit-img .thumb{display:inline-block;width:23.5rem;height:14.8rem;background-position:0 0;background-repeat:no-repeat;background-size:contain}
+
+/* 카드충전 */
+.mybon .card_recharge{border:1px solid #ccc}
+.mybon .card_recharge .bg_orange{margin-bottom:0.5rem;padding:1rem;text-align:center;background:#f39700;font-size:1.7rem;color:#fff}
+.mybon .card_recharge .box{padding:0.5rem;border-top:1px dotted #ccc}
+.mybon .card_recharge .box:first-child{border-top:0}
+.mybon .card_recharge .recharge_info{margin:-1rem 0.3rem 0}
+.mybon .card_recharge .bu_list{margin:1.5rem 1rem}
+.mybon .card_recharge .scroll_wrap{overflow-x:hidden;overflow-y:auto;height:20rem}

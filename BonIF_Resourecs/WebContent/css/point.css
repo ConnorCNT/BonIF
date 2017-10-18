@@ -1,0 +1,50 @@
+/* 본포인트 소개 */
+.point .gray-box {box-sizing:border-box;border:5px solid #f1f1f1;padding:1.8rem 0;text-align:center;}
+.point .banner_wrap {text-align:center;}
+.point .banner_wrap .banner_ul {display:inline-block;width:100%;height:auto; background:#fff;}
+.point .banner_wrap .banner_ul li {float:left;border-top:1px solid #ccc;border-right:1px solid #ccc;border-bottom:1px solid #ccc;width:33.33333%;min-height:6rem;box-sizing:border-box;}
+.point .banner_wrap .banner_ul li:first-child,
+.point .banner_wrap .banner_ul li:nth-child(4) {border-left:1px solid #ccc;}
+.point .banner_wrap .banner_ul li:nth-child(4) {margin-left:16.66665%;}
+.point .banner_wrap .banner_ul .img01 {background:url(../img/point/point_brand_01.png) center center no-repeat;background-size:contain;}
+.point .banner_wrap .banner_ul .img02 {background:url(../img/point/point_brand_02.png) center center no-repeat;background-size:contain;}
+.point .banner_wrap .banner_ul .img03 {background:url(../img/point/point_brand_04.png) center center no-repeat;background-size:contain;}
+.point .banner_wrap .banner_ul .img04 {background:url(../img/point/point_brand_03.png) center center no-repeat;background-size:contain;}
+.point .banner_wrap .banner_ul .img05 {background:url(../img/point/point_brand_05.png) center center no-repeat;background-size:contain;}
+.point .banner_wrap .banner_ul .img04,
+.point .banner_wrap .banner_ul .img05{margin-top:0.5rem;}
+.point .block {display:block;}
+/* 가입 및 이용 안내 */
+.point .notice_list .notice_head {padding:2.75rem 2rem;background:#54951e; color:#fffefe;}
+.point .notice_list .notice_head .head_num {}
+.point .notice_list .notice_head .head_title {font-size:1.7rem;}
+.point .notice_list .notice_contents {height:auto;padding:2rem 2.05rem;box-sizing:border-box;border-left:1px solid #cccccc;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;}
+.point .notice_list .notice_contents .img_wrap {width:100%;}
+.point .notice_list .notice_contents .img_wrap.img01 {min-height:13.4rem;background:url(../img/point/notice_list_img1.png) center center no-repeat;background-size:contain;}
+.point .notice_list .notice_contents .img_wrap.img02 {min-height:14.85rem;background:url(../img/point/notice_list_img2.png) center center no-repeat;background-size:contain;}
+.point .notice_list .notice_contents .img_wrap.img03 {min-height:14.9rem;background:url(../img/point/notice_list_img3.png) center center no-repeat;background-size:contain;}
+.point .notice_list .notice_contents .img_wrap.img04 {min-height:15.05rem;background:url(../img/point/notice_list_img4.png) center center no-repeat;background-size:contain;}
+.point .notice_list .notice_foot {padding:1.55rem; background:#f9f9f9}
+.btn_area {width:100%;text-align:center;}
+.btn_area .btn_cw {display:inline-block;width:11.9rem;height:3.9rem;line-height:3.9rem;border:1px solid #ccc;font-size:1.3rem;color:#222222;}
+/* 등급별 안내 */
+.sub_content h1.page-title.m0{margin:0;}
+.level_list {border-top:2px solid #222;}
+.level_list li {border-bottom:1px solid #cccccc;padding:2.35rem 2rem;}
+.level_list li .level,
+.level_list li .content {float:left;width:70%; text-align:center;min-height:5.6rem;}
+.level_list li .content strong {display:inline-block;width:13.9rem;height:2.7rem;line-height:2.7rem;background:#f9f9f9;margin-top:1rem;}
+.level_list li:after{content:"";clear:both;display:block;}
+.level_list li .level {width:30%;}
+.level_list li .level.img01 {min-height:5.6rem;background:url(../img/common/ico_level01.png) center center no-repeat;background-size:contain;}
+.level_list li .level.img02 {min-height:5.6rem;background:url(../img/common/ico_level02.png) center center no-repeat;background-size:contain;}
+.level_list li .level.img03 {min-height:5.6rem;background:url(../img/common/ico_level03.png) center center no-repeat;background-size:contain;}
+/* 카드 등록 및 완료 */
+.pointcard_agree{position:relative;padding-top:0.5rem}
+.pointcard_agree .radio_box{display:block}
+.pointcard_agree .btn_bd_gray{position:absolute;right:0;top:0}
+
+/* pointcard */
+.pointcard_agree{position:relative;padding-top:0.5rem}
+.pointcard_agree .radio_box{display:block}
+.pointcard_agree .btn_bd_gray{position:absolute;right:0;top:0}

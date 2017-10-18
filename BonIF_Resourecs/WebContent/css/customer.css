@@ -1,0 +1,57 @@
+/* 소비자 중심 경영 */
+.customer .customer-content p {line-height:1.5;}
+.customer .customer-content img {display:block;margin:0 auto;}
+.customer .customer-content li {padding-bottom:0;line-height:1.7rem}
+.customer .customer-content .content_img {width:100%;border:1px solid #cccccc;box-sizing: border-box;}
+.customer .customer-content .conA {min-height:16rem;background:url('../img/customer/ccm.png') no-repeat;background-size:14.25rem 9rem;background-position: center center }
+.customer .customer-content .conB {min-height:57.2rem;background:url('../img/customer/contentA_1.png') no-repeat;background-size:contain;background-position: top center;border:0;}
+.customer .customer-content .conC {min-height:28.3rem;background:url('../img/customer/contentA_2.png') no-repeat;background-size:contain;background-position: top center;border:0;}
+.customer .customer-content .line-box {border:0.25rem solid #f1f1f1;text-align:center;padding:1.75rem 0;}
+/* 자주 묻는 질문 리스트 유 */
+.customer .accordion_wrap{border-top:2px solid #ccc;border-bottom:1px solid #ccc}
+.customer .accordion_banner li{border-top:1px solid #ccc;box-sizing:border-box}
+.customer .accordion_banner li:first-child{border-top:0}
+.customer .accordion_banner li.active .accordion_title .f25{color:#60a224}
+.customer .accordion_banner li .accordion_title{display:table;width:100%;padding:1.5rem 0;background:url('../img/common/bottom_arrow.png') no-repeat center right 1.5rem}
+.customer .accordion_banner li.active .accordion_title{background:url('../img/common/top_arrow.png') no-repeat center right 1.5rem}
+.customer .accordion_banner li .accordion_title div{display:table-cell;vertical-align:middle;width:70%;}
+.customer .accordion_banner li .accordion_title div:first-child{width:9rem;text-align:center;padding:0 !important;margin:0;height:auto;}
+.customer .accordion_banner li .accordion_title div span {display:inline-block;vertical-align:top;border:1px solid #ccc; width:6rem;height:2rem;line-height:2rem;}
+.customer .accordion_banner li .accordion_title div p {word-break:break-all;padding-right:5.25rem;}
+.customer .accordion_banner li .accordion_title:after{display:block;clear:both;content:"";}
+.customer .accordion_banner li .accordion_sub {display:none;background:#f9f9f9;padding:1.55rem 1.6rem;border-top:1px solid #ccc}
+.customer .accordion_banner li .accordion_sub p {word-break:break-all}
+/* Bon 리서치 */
+.customer .research_ing li{position:relative;border:1px solid #ccc}
+.customer .research_ing .vote_head{display:table;width:100%;border-bottom:1px solid #ccc;padding:1.35rem 2rem}
+.customer .vote_head .brand{display:table-cell;background:url(../img/main/fw400_research.png) no-repeat;background-size:contain;width:45%;height:2.1rem;}
+.customer .vote_head .brand.m01{background:url('../img/main/brand_title_01.png') no-repeat;background-position: 0.1rem -0.2rem;background-size:contain}
+.customer .vote_head .brand.m02{background:url('../img/main/brand_title_02.png') no-repeat;background-position: 0.1rem -0.3rem;background-size:contain}
+.customer .vote_head .brand.m03{background:url('../img/main/brand_title_03.png') no-repeat;background-position: 0.1rem -0.4rem;background-size:contain}
+.customer .vote_head .brand.m04{background:url('../img/main/brand_title_04.png') no-repeat;background-position: 0.1rem -0.3rem;background-size:contain}
+.customer .vote_head .brand.m05{background:url('../img/main/brand_title_05.png') no-repeat;background-position: 0.1rem -0.3rem;background-size:contain}
+.customer .research_ing .release_date {display:table-cell;text-align:right;width:55%;vertical-align:middle;}
+.customer .research_ing .release_date span {margin: 0 0 0 0.5rem;}
+.customer .research_ing .release_date span:first-child {padding:0;}
+.customer .research_ing .vote_content{padding:1.95rem;}
+.customer .research_ing .vote_content .join_date .font_space:before{content:'';clear:both;display:inline-block;width:1px;height:0.7rem;margin:0 1rem 0 1rem;background:#ccc;}
+.customer .research_ing .vote_content .vote_box strong {display:block;}
+.customer .research_ing .btn_area {width:100%;text-align:center;}
+.customer .research_ing .btn_area .btn_vote {display:inline-block;width:10.1rem;height:4.1rem;line-height:4.1rem;color:#fff;background:#222222;}
+/* Bon 리서치 - 진행중인 이벤트 */
+.customer .research_content{border-top:2px solid #222;border-bottom:1px solid #ccc}
+.customer .research_content li{padding:1.5rem 0 1.4rem 1.5rem;border-top:1px solid #ccc}
+.customer .research_content li:first-child{border-top:0}
+.customer .research_content .radio_box{margin-top:1.6rem}
+.customer .research_content .fake.top {top:12%;}
+.customer .research_content .radio_box .input_text input {margin:1rem 0 0.55rem 0}
+/* Bon 리서치 - 종료된 이벤트 */
+.customer .research-blinder{position:absolute;display:none;top:0;left:0;bottom:0;right:0;background:rgba(0,0,0,0.3) url('../img/event/blinder_bg.png') center center no-repeat;background-size:13rem}
+.customer .research-blinder.on{display:block}
+.customer .research-link{position:absolute;display:block;top:0;left:0;width:100%;height:100%}
+/* Bon 리서치 - 결과보기 */
+.customer .research_content.in_pd {padding:2rem 1.55rem}
+
+/* 공지사항 */
+.customer .notice_head{position:relative;border-top:1px solid #ccc;border-bottom:2px solid #ccc;margin-bottom:3rem;padding:1.1rem 8rem 1.1rem 1.5rem;background:#f9f9f9;word-wrap:break-word}
+.customer .notice_head .notice_date{position:absolute;right:1.5rem;top:50%;margin-top:-0.8rem;letter-spacing:0;color:#666}

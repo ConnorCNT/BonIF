@@ -1,0 +1,179 @@
+@charset "utf-8";
+@font-face{font-family:'FontAwesome';
+	src:url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?v=4.2.0');
+	src:url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'),url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'),url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'),url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+	font-weight:normal;
+	font-style:normal
+}
+.checkbox, .radio{position:relative;display:inline-block;padding-right:10px;}
+.checkbox input, .radio input{position:absolute; width:0; height:0; left:0; top:0;}
+.checkbox input:checked, .radio input:checked, .checkbox input:focus, .radio input:focus{outline:none! important}
+.checkbox input+.lbl, .memberCheck .lbl, .radio input+.lbl{display:inline-block;min-width:27px;min-height:27px;line-height:27px;position:relative;vertical-align:middle;}
+.checkbox input+.lbl:before, .radio input+.lbl:before{content:'\f00c';font-family:fontAwesome;font-weight:normal;font-size:20px;color:#fff;background-color:#fff;border:1px solid #ccc;box-shadow:0 1px 2px rgba(0, 0, 0, 0.05);/* border-radius:5px;*/display:inline-block;text-align:center;height:29px;line-height:29px;min-width:29px;margin-right:10px;box-sizing:border-box;cursor:pointer;}
+.memberCheck input+.lbl:before{float:right;margin-right:0;margin-left:15px;}
+.checkbox input:checked+.lbl:before, .radio input+.lbl:after, .memberCheck input:checked:before{display:inline-block;}
+.radio input+.lbl:before{/*border-radius:14px;*/}
+.radio input:checked+.lbl:before, .checkbox input:checked+.lbl:before{color:#60a224;}
+.checkbox input:disabled+.lbl:before, .radio input:disabled+.lbl:before, 
+.checkbox input[disabled]+.lbl:before, .radio input[disabled]+.lbl:before, 
+.checkbox input.disabled+.lbl:before, .radio input.disabled+.lbl:before{background-color:#eee;border-color:#CCC;box-shadow:none;color:#eee}
+.checkbox.hover > input + .lbl:before, .radio.hover > input + .lbl:before{border-color:#777}
+/*************************************************************************************/
+/* �씠踰ㅽ듃
+/*************************************************************************************/
+.event-wrapper{margin-bottom:4.5rem}
+.event{position:relative;width:100%;height:13rem;margin-bottom:2rem;background-color:#f2f2f2;background-position:right center;background-repeat:no-repeat;background-size:contain;padding:0 1.429rem}
+.event.ev-2 {height:auto;background-color:transparent;padding:0}
+.event.ev-2 .event-img img {width:100%;height:auto}
+.event.ev-2 .event-txt {margin-top:12px}
+.event:after{content:'';clear:both;display:inline-block;height:100%;vertical-align:middle}
+.event:last-child{margin-bottom:0}
+.event .event-link{position:absolute;display:block;top:0;left:0;width:100%;height:100%}
+.event .text_box{display:inline-block;width:99%;vertical-align:middle}
+.event h5{font-size:1.7rem;font-weight:400;margin-bottom:0}
+.event .date{margin-top:0.3rem;font-size:1.1rem;color:#f39700;letter-spacing:0}
+
+/* 醫낅즺�맂 �씠踰ㅽ듃 */
+.event-blinder{position:absolute;display:none;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3) url('../img/event/blinder_bg.png') center center no-repeat;background-size:contain}
+.event-blinder.on{display:block}
+
+/* �씠踰ㅽ듃 寃곌낵蹂닿린 �긽�꽭 */
+.event-result{padding:1.5rem 0}
+.event-result p{margin-bottom:1.2rem}
+.event-result p:last-child{margin-bottom:0}
+.event-result img{width:100%;height:auto}
+
+.file_box{margin-bottom: 3.7rem}
+.file_box .box_title{font-size:1.5rem}
+.file_box .box_file{margin-left:1rem;display:inline-block;position:relative}
+.file_box .box_file input{opacity:0;-ms-filter:"alpha(opacity=0)";filter:alpha(opacity=0)}
+.file_box .box_file .fake{display:inline-block;width:6rem;padding:0.4rem 0.5rem;text-align:center;font-size:1.2rem;background:#222;color:#fff}
+.file_box .box_text{color: #f39700}
+
+.btn-list{margin-bottom:3.7rem;text-align:center}
+.btn-list.event_in {padding:2rem;margin:0 1.5rem;border-top:1px solid #ccc}
+.btn-list.event_end_in {padding:2rem;border-top:1px solid #ccc}
+.btn-list a{font-size:1.3rem;color:#fff;height:3.7rem;line-height:2.8;background-color:#666;padding:0 1.9rem;margin-bottom:0}
+.btn-list a.green {background: #60a224}
+
+.member_content .t_box h3 {margin-bottom:2rem;margin-bottom:40px}
+.member_content .t_box h4 {margin-bottom:1.5rem;margin-bottom:30px}
+
+.reply_area .textarea textarea {width:100%;*width:100%;height:6rem;height:100px;padding-top:1rem}
+
+.inner_event{position:relative;padding-right:9rem;margin-bottom:3.7rem}
+.inner_event .event_btn {position:absolute;right:0;top:0}
+
+.reply_list li {padding:1.5rem 0;border-bottom:1px solid #ccc}
+.reply_list li:first-child{border-top:1px solid #ccc}
+.reply_list li > .list_cont{margin-bottom:1rem;margin-bottom:20px;word-break:break-all;}
+.reply_list li > .list_name{}
+.reply_list li > .list_bar{margin:0 1rem}
+.reply_list li > .list_date{color: #666;letter-spacing:0}
+
+.event_end .event_area{position:relative;padding-left:7rem;}
+.event_end .event_area > .event_text{position:absolute;top:1rem;left:0}
+.event_end .event_area > .type_span1{display: inline-block;width: 7.5%;height: 4rem;line-height: 4rem;text-align: center;}
+.event_end .event_area > .type1{width: 28%;;height:4rem}
+.event_end .contents_inner {border:1px solid #ccc;padding:1.5rem}
+
+/* 吏꾪뻾以묒씤 �씠踰ㅽ듃 > �뙎湲��궘�젣踰꾪듉 異붽� */
+.reply_list li {position:relative}
+.reply_list .btn_delete {position:absolute;bottom:16px;right:12px;width:32px;height:32px;border:1px solid #ccc;background:url('../img/common/close_btn.png') center center no-repeat;}
+
+/* 버튼 */
+.button{display:inline-block;position:relative;height:40px;line-height:40px;padding:0 20px;vertical-align:middle;box-sizing:border-box;text-align: center;min-width:90px;}
+.button:active{transform:scale(0.95);}
+.button.btn_blk{color:#fff;background:#222;}
+.button.btn_gray{color:#fff;background: #666}
+.button.btn_gray2{color:#fff;background: #888}
+.button.btn_green{color:#fff;background: #60a224;}
+.button.btn_wht{color:#222;background: #fff;border:1px #ddd solid;}
+/* form */
+.checkbox, .radio{position:relative;display:inline-block;padding-right:10px;}
+.checkbox input, .radio input{position:absolute; width:0; height:0; left:0; top:0;}
+.checkbox input:checked, .radio input:checked, .checkbox input:focus, .radio input:focus{outline:none! important}
+.checkbox input+.lbl, .memberCheck .lbl, .radio input+.lbl{display:inline-block;min-width:27px;min-height:27px;line-height:27px;position:relative;vertical-align:middle;}
+.checkbox input+.lbl:before, .radio input+.lbl:before{content:'\f00c';font-family:fontAwesome;font-weight:normal;font-size:20px;color:#fff;background-color:#fff;border:1px solid #ccc;box-shadow:0 1px 2px rgba(0, 0, 0, 0.05);/* border-radius:5px;*/display:inline-block;text-align:center;height:29px;line-height:29px;min-width:29px;margin-right:10px;box-sizing:border-box;cursor:pointer;}
+.memberCheck input+.lbl:before{float:right;margin-right:0;margin-left:15px;}
+.checkbox input:checked+.lbl:before, .radio input+.lbl:after, .memberCheck input:checked:before{display:inline-block;}
+.radio input+.lbl:before{/*border-radius:14px;*/}
+.radio input:checked+.lbl:before, .checkbox input:checked+.lbl:before{color:#60a224;}
+.checkbox input:disabled+.lbl:before, .radio input:disabled+.lbl:before, 
+.checkbox input[disabled]+.lbl:before, .radio input[disabled]+.lbl:before, 
+.checkbox input.disabled+.lbl:before, .radio input.disabled+.lbl:before{background-color:#eee;border-color:#CCC;box-shadow:none;color:#eee}
+.checkbox.hover > input + .lbl:before, .radio.hover > input + .lbl:before{border-color:#777}
+
+/* 이벤트 팝업 */
+.pop_event_open{display: block;text-align: center;}
+.pop_event_open input{max-width:450px;height:40px;border:3px #000 solid;padding:10px;}
+
+.pop_event_wrap{position: fixed;left:0;top:0;bottom:0;right:0;overflow-y:scroll; display:none ;box-sizing:border-box;padding:20px 0;}
+.pop_event_wrap:before{position: fixed;left:0;right:0;top:0;bottom:0;background: url(../img/common/bg_blk70.png);content:'';display: block;}
+.pop_event_wrap .pop_event_form{max-width:520px;position: relative;width:90%;margin:auto;background: #fff;box-sizing:border-box;}
+.pop_event_wrap .pop_event_form h2{color:#fff;background:#27600a;font-weight: bold;font-size:25px;text-align: center;line-height:64px;}
+.pop_event_wrap .pop_event_form ul{padding:20px;}
+.pop_event_wrap .pop_event_form ul li strong{font-size:18px;display: block;margin-top:5px;}
+.pop_event_wrap .pop_event_form ul li input{width:100%;border:1px #ccc solid;font-size:16px;line-height:30px;padding:0 10px;margin-bottom:15px;}
+.pop_event_wrap .pop_event_form ul li textarea{box-sizing:border-box;width:100%;border:1px #ccc solid;padding:10px;height:70px;font-size:16px;}
+.pop_event_wrap .pop_event_form p{text-align: center;padding:10px 0;color:#27600a;font-size:15px;}
+.pop_event_wrap .pop_event_form ul li p input{border:0;}
+.pop_event_wrap .pop_event_form ul li .lbl{width:100%;}
+.pop_event_wrap .pop_event_form ul li .checkbox{padding-right:0;font-size:14px;width:100%;}
+.pop_event_wrap .pop_event_form .button{font-size:16px;}
+.pop_event_wrap .pop_event_form #bonif_policy{width:100%;height:150px;position: relative;overflow-y:scroll;border:1px #ccc solid;font-size:15px;color:#333;line-height:15px;padding:10px;box-sizing:border-box;}
+.pop_event_wrap .pop_event_form #bonif_policy p{text-align: left;color:#333;}
+
+.event_wrap{position: relative;background:#fcf2e6;box-sizing:border-box;}
+.event_wrap img{width:100%;}
+/* 위로 이벤트 */
+.event_1707_cheer .event_input_area {display: block;width:80%;margin:auto;padding-right:60px;box-sizing:border-box;border:5px #78a961 solid;padding:5px 60px 5px 5px;background: #fff;position: relative;}
+.event_1707_cheer .event_input_area input{width:100%;padding:0;border:0;height:40px;margin-bottom:0;}
+.event_1707_cheer .event_input_area span{display: inline-block;width:55px;height:50px;color:#fff;background: #78a961;position: absolute;right:-5px;top:0;line-height:24px;padding-top:2px;box-sizing:border-box;text-align: center;cursor: pointer}
+.event_reply_box{width:80%;height:159px;overflow:auto;box-sizing:border-box;border:2px #78a961 solid;margin:5px auto 20px; background: #fff}
+.event_reply_box table{border-top:0;width:100%;}
+.event_reply_box table tbody{width:100%;display: inline-table;}
+.event_reply_box table td{text-align: left;color:#333;font-size:12px;line-height:30px;white-space: nowrap;position: relative;border-bottom:2px #78a961 solid;padding:0 10px;box-sizing:border-box;}
+
+/* 울릉도 독도 이벤트 */
+.event_1707_dokdo{background:#f0eceb;}
+.event_1707_dokdo .event_input_area {display: block;width:80%;margin:20px auto;padding-right:60px;box-sizing:border-box;border:5px #668341 solid;padding:5px 60px 5px 5px;background: #fff;position: relative;}
+.event_1707_dokdo .event_input_area input{width:100%;padding:0;border:0;height:40px;margin-bottom:0;}
+.event_1707_dokdo .event_input_area span{display: inline-block;width:55px;height:50px;color:#fff;background: #668341;position: absolute;right:-5px;top:0;line-height:24px;box-sizing:border-box;text-align: center;cursor: pointer;font-weight: bold;}
+.pop_1707_dokdo.pop_event_form ul li{margin-bottom:15px;}
+.pop_1707_dokdo.pop_event_form ul .event_radio .radio{width:50%;float:left;padding-right:0;margin-top:5px;}
+.pop_1707_dokdo.pop_event_form ul .event_radio .radio input+.lbl:before{border-radius:50%;}
+.pop_1707_dokdo.pop_event_form ul .event_radio .radio input{border:0;}
+.pop_1707_dokdo.pop_event_form ul .event_radio:after{content:'';display: block;clear:both;}
+.pop_1707_dokdo.pop_event_form ul li input{margin-bottom:0;}
+
+
+/* 본죽 15주년 댓글 이벤트 */
+.event_1709_anniversary{background:#740101;}
+.event_1709_anniversary .pop_event_form h2{background:#48000;}
+.event_1709_anniversary .event_input_area {display: block;width:85%;margin:auto;padding-right:60px;box-sizing:border-box;border:5px #480000 solid;padding:5px 60px 5px 5px;background: #fff;position: relative;}
+.event_1709_anniversary .event_input_area input{width:100%;padding:0;border:0;height:40px;margin-bottom:0;}
+.event_1709_anniversary .event_input_area span{display: inline-block;width:55px;height:50px;color:#fff;background: #480000;position: absolute;right:-5px;top:0;line-height:24px;padding-top:2px;box-sizing:border-box;text-align: center;cursor: pointer}
+.event_1709_anniversary .event_reply_box{border:2px #480000 solid;width:85%;}
+.event_1709_anniversary .pop_event_open input{max-width:100%;}
+.event_1709_anniversary .event_bottom{height:50px;background: #480000;}
+.pop_event_wrap .pop_1709_anniversary h2{background:#480000;}
+
+/* 2017 09 08 이미지 업로드 이벤트 */
+.event_1709_photo a{font-size:0;}
+.pop_1709_photo .pop_event_form h2{font-size:23px;background: #480000;}
+.pop_1709_photo .pop_event_form ul li input{margin-bottom:0;height:30px;}
+.pop_1709_photo .pop_event_form .event_file{position: relative;overflow: hidden;width:100%;height:32px;border:1px #ccc solid;background: #fff;display: block;line-height:32px;box-sizing:border-box;padding:0 5px;}
+.pop_1709_photo .pop_event_form .event_file:before{content:'';position: absolute;width:32px;height:32px;display: inline-block;background:#fff;border-left:1px #ccc solid;right:0;top:0;}
+.pop_1709_photo .pop_event_form .event_file:after{content:'+';display: inilne-block;width:32px;height:32px;text-align: center;color:#ccc;font-size:20px;position: absolute;right:0;top:0;}
+.pop_1709_photo .pop_event_form .event_file input{width:1px;height:1px;position: absolute;left:-100px;top:-100px;}
+.pop_1709_photo .pop_event_form .event_file span{display: inline-block;width:100%;overflow: hidden; white-space: normal;word-wrap: break-word;-webkit-line-clamp: 1;-webkit-box-orient: vertical;text-overflow: ellipsis;padding-right:30px;box-sizing:border-box;}
+
+@media only screen and (max-width:480px){
+	.pop_event_wrap .pop_event_form h2{font-size:20px;}
+	.pop_event_wrap .pop_event_form ul li strong{font-size:16px;}
+	
+	/* 2017 09 08 이미지 업로드 이벤트 */
+	.pop_event_wrap .pop_event_form h2{font-size:18px;line-height:30px;padding:10px 0;}
+	.pop_event_wrap .pop_event_form h2 span{display: block;}
+}

@@ -1,0 +1,99 @@
+/*************************************************************************************/
+/* 본아이에프 > 서브 공통 CSS
+/*************************************************************************************/
+
+/*********** [ Global ] **************************************************************/
+
+/* header */
+#header{height:4.95rem;border-bottom:2px solid #60a224;margin-bottom:2.4rem}
+.sub_content{margin-bottom:6rem}
+
+/* form */
+.option-label{display:block;font-size:1.3rem;margin-bottom:0.8rem}
+.login_area{margin-top:2.5rem}
+.login_area .column{padding:0 1.5rem}
+.login_area .welcome_text{padding-bottom:1.6rem}
+.login_area .welcome_text .sub_text {margin-left:1rem}
+.login_area .text-right label{margin:0.1rem 0 1.5rem;padding:0;font-size:1.3rem}
+.login_area input + input{margin-top:-0.4rem}
+.login_area .column p.text-center{margin-top:0.6rem;letter-spacing:0}
+
+.sub_nav_area{margin-top:-2.4rem}
+.bx-wrapper{margin-bottom:2.038em;border-bottom:1px solid #ccc}
+.bx-wrapper .bx-viewport{}
+.sub_nav{overflow-x:auto;overflow-y:hidden;height:3.9rem;background-color:#f9f9f9}
+.sub_nav li{width:auto !important;padding:1rem 0 1.2rem 1.5rem}
+.sub_nav li a{font-size:1.3rem;white-space:nowrap}
+.sub_nav li.active a{color:#60a224}
+.bx-wrapper .bx-pager{display:none}
+.bx-wrapper .bx-controls-direction a{width:3.9rem;height:3.9rem;background-size:contain}
+
+/* btn_foot */
+.btn_foot a,.btn_foot button{float:left;width:50%}
+.btn_foot a .text-center,.btn_foot button .text-center{display:block;margin-left:0.5rem;height:4rem;line-height:3;font-weight:300;font-size:1.3rem}
+.btn_foot a:first-child .text-center,.btn_foot button:first-child .text-center{margin-left:0}
+
+/* tab_black */
+.tab_black{height:4rem}
+.tab_black:after{clear:both;content:'';display:block}
+.tab_black li{float:left;width:50%;height:3.9rem;line-height:3}
+.tab_black li.on a{border:1px solid #222;background:#222;color:#fff}
+.tab_black a{display:block;border:1px solid #ccc;text-align:center;font-size:1.3rem;color:#666}
+
+/* scroll List */
+.scroll_area ul{overflow-x:hidden;overflow-y:auto}
+.scroll_area li{letter-spacing:0}
+.scroll_area a{display:block;padding:0 1.5rem;height:4rem;line-height:3.4;font-weight:300;color:#222}
+.scroll_area .on a,.order .scroll_area a:hover,.order .scroll_area a:focus{background:#60a224;color:#fff}
+.scroll_area{border:1px solid #ccc}
+
+/* search_area */
+.search_area{overflow:hidden;position:relative;padding-right:8.6rem}
+.search_area .input_text{display:block;padding:0 1.5rem 0;border:1px solid #ccc}
+.search_area .input_text input{display:block;margin:0;padding:0;border:0;width:100%}
+.search_area .btn_srch{position:absolute;top:0;right:0;width:8.1rem;height:4rem;line-height:3.3;background:#333;color:#fff}
+.search_wrap .tab_content{display:none}
+.search_wrap .tab_content.on{display:block}
+.search_wrap .tab_content:nth-child(2) .search_area{padding-right:8.6rem}
+.search_wrap .tab_content:nth-child(2) .search_area .btn_srch{width:8.1rem}
+.search_area .btn_srch.bg_gray{background:#666}
+
+/* delivery register */
+.popup_area.delivery{position:absolute;left:0;top:0;width:100%;}
+.popup_area.delivery .contents{padding:1.5rem}
+.popup_area.delivery .contents .user_entry{margin-top:1rem;padding-top:1rem;border-top:1px dotted #ccc}
+.popup_area.delivery .contents .input_text [type=text]{height:3.7rem;line-height:3.7rem}
+.popup_area.delivery .contents .btn_delivery{overflow:hidden}
+.popup_area.delivery .contents .btn_delivery a{display:inline-block;padding:1.2rem 1.5rem 1.15rem 1.4rem;white-space:nowrap;background:#666;color:#fff}
+.popup_area.delivery .contents .btn_delivery a + a{margin-left:0.3rem}
+.popup_area.delivery .address_box{height:3.7rem;line-height:3.7rem;border:1px solid #ccc;background:#f9f9f9}
+
+.address_wrapper .address_box{height:3.7rem;line-height:3.7rem;border:1px solid #ccc;background:#f9f9f9}
+.address_wrapper .office_no{margin-bottom:1rem}
+.address_wrapper .office_no:after{content:'';display:block;clear:both}
+.address_wrapper .office_no .address_box{float:left;width:40%}
+.address_wrapper .office_no a{float:left;height:3.7rem;line-height:3.7rem;padding:0 1.5rem;white-space:nowrap;background:#666;color:#fff;margin-left:10px}
+
+.h2_more{position:relative}
+.h2_more .btn_more{position:absolute;right:0;bottom:0;border:1px solid #ccc;width:2.9rem;height:2.9rem;text-align:center;font-size:1.9rem;font-weight:300;color:#666}
+
+/* tbl_thead_gray */
+.tbl_thead_gray{border-top:1px solid #ccc}
+.tbl_thead_gray:after{content:'';display:block;clear:both}
+.tbl_thead_gray thead{background:#f9f9f9}
+.tbl_thead_gray thead th{padding:1.1rem 0 1.15rem 1.5rem}
+
+/* 단체주문 안내사항 팝업 */
+.sub_txt{max-width:640px}
+.sub_txt .contents{padding-top:1.5rem;padding-bottom:1.5rem}
+.sub_txt .contents li{position:relative;padding-left:10px;margin-bottom:10px}
+.sub_txt .contents li:before{content:'-';position:absolute;top:-1px;left:0px}
+.sub_txt .btn_foot{padding:0 1.5rem 1.5rem}
+.sub_txt .btn_foot a{float:none;width:100%}
+
+/* 배송지 등록 추가분 */
+.search_division_2:after, .search_division_3:after{content:'';display: block;clear:both;margin-bottom:1rem;}
+.search_division_2 span, .search_division_3 span{display: block;float: left;box-sizing:border-box;padding-left:0.5rem;}
+.search_division_2 span:first-child, .search_division_3 span:first-child{padding-left:0;}
+.search_division_2 span{width:50%;}
+.search_division_3 span{width:33.3333%;}

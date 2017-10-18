@@ -1,0 +1,10 @@
+/*************************************************************************************/
+/* 본아이에프 > 오시는길
+/*************************************************************************************/
+
+.contact-us{margin-bottom:6rem}
+.contact-us h2{padding:0.9rem 0 1.7rem;margin-bottom:0}
+.contact-us .tbl_contact th,.contact-us .tbl_contact td{padding:0.9rem 0}
+.contact-us .tbl_contact th{text-align:left}
+.contact-us .tbl_contact td.map{padding:0}
+.contact-us .tbl_contact td.map #map{border-top:0;border-bottom:0}
