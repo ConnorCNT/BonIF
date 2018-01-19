@@ -270,7 +270,7 @@ CNTLib.GroupOrder.prototype ={
 					var form = this.htLayer.form;
 					if(!$("#agree2").is(".checked")){
 						$("#agree2_focus").focus();
-						alert("개인정보처리방침에 동의하셔야 합니다.");
+						alert("개인정보취급방침에 동의하셔야 합니다.");
 						return false;
 					}
 					

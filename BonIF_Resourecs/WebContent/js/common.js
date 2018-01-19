@@ -27,6 +27,17 @@ function init_nav(){
 		$('.close-button').addClass('hide');
 		$('.js-off-canvas-exit').removeClass('is-visible');
 	});
+	
+	/* off-canvas : 닫기버튼 클릭 처리 */
+	$(".close-button-after").click(function() {
+		$('.off-canvas-wrapper-inner').removeClass('is-off-canvas-open');
+		$('.off-canvas-wrapper-inner').removeClass('is-open-left');
+		$('.off-canvas-wrapper-inner').removeClass('is-open-right');
+		$('.off-canvas.position-left').removeClass('is-open');
+		$('.off-canvas.position-right').removeClass('is-open');
+		$('.close-button').addClass('hide');
+		$('.js-off-canvas-exit').removeClass('is-visible');
+	});
 
 	/* off-canvas : close 이벤트 발생시 닫기버튼 상태변경 */
 	$(".off-canvas").on("closed.zf.offcanvas", function(e) {
@@ -247,8 +258,9 @@ function numberWithCommas(x) {
  */
 $(document).ready(function(){
 	// 숫자만 입력
-	$("input:text[numberOnly]").on("keyup", function() {
-        $(this).val( $(this).val().replace(/[^0-9]/gi,"") );
+	$("input:text[numberOnly]").on("keyup paste", function(e) {
+		var tmp_val = e.originalEvent.clipboardData ? e.originalEvent.clipboardData.getData("text/plain") : $(this).val();
+		$(this).val(tmp_val.replace(/[^0-9]/gi,""));
     });
 	
 	//첫번째 팝업 오늘하루 보지않기

@@ -1,4 +1,4 @@
-/* º»Æ÷ÀÎÆ® ¼Ò°³ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò°ï¿½ */
 .point .gray-box {box-sizing:border-box;border:5px solid #f1f1f1;padding:1.8rem 0;text-align:center;}
 .point .banner_wrap {text-align:center;}
 .point .banner_wrap .banner_ul {display:inline-block;width:100%;height:auto; background:#fff;}
@@ -14,7 +14,7 @@
 .point .banner_wrap .banner_ul .img04,
 .point .banner_wrap .banner_ul .img05{margin-top:0.5rem;}
 .point .block {display:block;}
-/* °¡ÀÔ ¹× ÀÌ¿ë ¾È³» */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¿ï¿½ ï¿½È³ï¿½ */
 .point .notice_list .notice_head {padding:2.75rem 2rem;background:#54951e; color:#fffefe;}
 .point .notice_list .notice_head .head_num {}
 .point .notice_list .notice_head .head_title {font-size:1.7rem;}
@@ -27,7 +27,7 @@
 .point .notice_list .notice_foot {padding:1.55rem; background:#f9f9f9}
 .btn_area {width:100%;text-align:center;}
 .btn_area .btn_cw {display:inline-block;width:11.9rem;height:3.9rem;line-height:3.9rem;border:1px solid #ccc;font-size:1.3rem;color:#222222;}
-/* µî±Þº° ¾È³» */
+/* ï¿½ï¿½Þºï¿½ ï¿½È³ï¿½ */
 .sub_content h1.page-title.m0{margin:0;}
 .level_list {border-top:2px solid #222;}
 .level_list li {border-bottom:1px solid #cccccc;padding:2.35rem 2rem;}
@@ -39,7 +39,7 @@
 .level_list li .level.img01 {min-height:5.6rem;background:url(../img/common/ico_level01.png) center center no-repeat;background-size:contain;}
 .level_list li .level.img02 {min-height:5.6rem;background:url(../img/common/ico_level02.png) center center no-repeat;background-size:contain;}
 .level_list li .level.img03 {min-height:5.6rem;background:url(../img/common/ico_level03.png) center center no-repeat;background-size:contain;}
-/* Ä«µå µî·Ï ¹× ¿Ï·á */
+/* Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï·ï¿½ */
 .pointcard_agree{position:relative;padding-top:0.5rem}
 .pointcard_agree .radio_box{display:block}
 .pointcard_agree .btn_bd_gray{position:absolute;right:0;top:0}

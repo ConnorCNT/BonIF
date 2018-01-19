@@ -1,35 +1,27 @@
-#bonif_policy .policy-index{list-style:none;border-bottom:1px solid #ccc;padding:0 0 0.75rem 0}
+#bonif_policy .policy-index{list-style:none;border-bottom:1px solid #ccc;padding:0 0 12px 0}
 #bonif_policy .policy-index > li:last-child{border-bottom:0}
 #bonif_policy .policy-index ul,
 #bonif_policy .policy-index ol{list-style:none}
 
-#bonif_policy ol{margin:1rem 0;padding-left:1.5rem}
-#bonif_policy ul{margin:1rem 0}
-#bonif_policy li{font-size:1rem;margin-bottom:1rem}
+#bonif_policy ol{margin:16px 0;padding-left:24px}
+#bonif_policy ul{margin:16px 0}
+#bonif_policy li{margin-bottom:16px}
 #bonif_policy ol > li:last-child{margin-bottom:0}
 #bonif_policy > ol{list-style:decimal}
 #bonif_policy ol > li > ol{list-style:upper-roman}
 #bonif_policy ol > li > ol > li > ol,
 #bonif_policy ol > li > ul > li > ol{list-style:lower-roman}
-#bonif_policy ul > li:before{content:'-';margin-right:0.3125rem}
+#bonif_policy ul > li:before{content:'-';margin-right:5px}
 
-#bonif_policy h3{font-size:14px;line-height:25px;}
-#bonif_policy h5{font-size:1.125rem;font-weight:normal;margin:3.125rem 0 0.4375rem 0}
-#bonif_policy h6{font-size:1rem;font-weight:normal;margin:0 0 0.4375rem 0}
+#bonif_policy h5{font-size:18px;font-weight:normal;margin:50px 0 7px 0}
+#bonif_policy h6{font-size:16px;font-weight:normal;margin:0 0 7px 0}
 #bonif_policy > h5:nth-child(1):before{content:'1.'}
 
-#bonif_policy table{margin-bottom:1rem}
-#bonif_policy table td{border:1px solid #ccc;padding:0.75rem}
+#bonif_policy table{margin-bottom:16px}
+#bonif_policy table td{border:1px solid #ccc;padding:12px}
 
-#bonif_policy p{font-size:1rem;margin-bottom:1rem}
-#bonif_policy .txt-comment:before{content:'※';margin-right:0.3125rem}
+#bonif_policy p{margin-bottom:16px}
+#bonif_policy .txt-comment:before{content:'※';margin-right:5px}
 
-#bonif_policy .txtstyle-dash{position:relative;padding-left:0.625rem;margin-bottom:0.4375rem}
+#bonif_policy .txtstyle-dash{position:relative;padding-left:10px;margin-bottom:7px}
 #bonif_policy .txtstyle-dash:before{position:absolute;top:0;left:0;content:'-'}
-
-/* 본 IF 이용약관 업데이트 */
-.bon_regal_warp{white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-break:break-all;line-height:25px;font-size:14px;font-family: 'NotoSans';}
-.bon_regal_warp i{font-style: normal;font-weight:700;}
-.bon_regal_warp table{font-size:13px;line-height:20px;border: 1px solid #ccc}
-.bon_regal_warp table th{background: #ccc;color:#000;line-height:30px;border-left:1px #fff solid;}
-.bon_regal_warp table th:first-child{border-left:0;}

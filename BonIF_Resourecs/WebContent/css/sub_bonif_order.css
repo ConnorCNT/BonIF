@@ -78,8 +78,8 @@
 .order .menu_list li.on:nth-child(even) .inner{margin-left:-2px}
 .order .menu_list .thumb{text-align:center;border-bottom:1px dotted #ccc}
 .order .menu_list .thumb .img{display:inline-block;width:14.5rem;height:14.5rem;background-position:center center;background-repeat:no-repeat;background-size:contain}
-.order .menu_list .description{padding:1.5rem 1.5rem 5px;font-size:1.3rem;min-height:160px; }
-.order .menu_list .description .name{display:block;min-height:50px}
+.order .menu_list .description{padding:1.5rem;font-size:1.3rem}
+.order .menu_list .description .name{display:block;min-height:60px}
 .order .menu_dsc,
 .multi_dsc{position:absolute;left:0;right:0;top:100%;margin-top:-2px;padding:1.5rem;border:2px solid #60a224;background-color:#f9f9f9;z-index:1}
 .multi_dsc{margin-left:auto;margin-right:auto}

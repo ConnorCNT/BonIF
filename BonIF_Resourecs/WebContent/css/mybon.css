@@ -65,6 +65,7 @@ form .mybon table .custom-chkbox span.checkbox{margin-left:0;margin-right:0.625r
 .coupon_info{padding:1.9rem}
 .coupon_info .star_list li{margin-top:1rem}
 
+
 /* mycoupon_box */
 .mycoupon_box{border:1px solid #ccc}
 .mycoupon_box li{float:left;width:50%;text-align:center}
@@ -86,11 +87,15 @@ form .mybon table .custom-chkbox span.checkbox{margin-left:0;margin-right:0.625r
 .mybon .coupon_list .box{position:relative;margin-top:2rem;border:1px solid #ccc}
 .mybon .coupon_list .box.center{text-align:center}
 .mybon .coupon_list .box.center .fin_label{position:absolute;top:0;left:0;width:6.65rem;height:3.2rem;line-height:3.2rem;background:#60a224;color:#fff;font-size:1.3rem}
+.mybon .coupon_list .box.center .fin_label.use_end{background:#646464;}
+.mybon .coupon_list .down_area.use_end{background:#646464;color:#fff;}
+.mybon .coupon_list .coupon_txt{position: absolute;left:0;top:50%;width:100%;-webkit-transform: translate(0, -50%);transform: translate(0, -50%);}
+.mybon .coupon_list .coupon_txt span{display: block;}
 .mybon .coupon_list .box img{height:13.3rem;max-height:100%;}
-.mybon .coupon_list .coupon{margin:1.5rem;height:13.3rem;border:6px solid #872728;background:url('/img/_dummy/coupon_bg.png') center right no-repeat;background-size:contain}
-.mybon .coupon_list .coupon a{display:block;height:12.4rem;padding-top:1rem}
+.mybon .coupon_list .coupon{margin:1rem;height:13.3rem;border:6px solid #872728;border-bottom:6px solid #6b5655;background:url('/img/_dummy/coupon_bg.png') center right no-repeat;background-size:contain}
+.mybon .coupon_list .coupon a{display:block;height:12.4rem;position:relative;}
 .mybon .coupon_list .coupon a .cp_tit {font-size:/*18px;*/1.286rem;color:#666}
-.mybon .coupon_list .coupon a .cp_promo {font-size:/*28px*/2rem;font-weight:500;height:/*64px*/4.571rem;line-height:/*64px*/4.571rem}
+.mybon .coupon_list .coupon a .cp_promo {font-size:/*28px*/1.5rem;font-weight:500;height:/*64px*/3rem;line-height:/*64px*/3rem}
 .mybon .coupon_list .coupon a .cp_promo span {font-size:/*56px*/4rem;font-weight:800;margin-right:/*7px*/0.5rem}
 .mybon .coupon_list .coupon a .cp_subtxt {font-size:/*15px*/1.071rem;color:#999}
 .mybon .coupon_list .coupon a .color_red {color:#955762}
@@ -127,6 +132,10 @@ form .mybon table .custom-chkbox span.checkbox{margin-left:0;margin-right:0.625r
 .mybon .my_level .content .bg_gray{padding:0.6rem 1rem;font-weight:300}
 .mybon .my_level .barcode_area{padding:2rem 0;border-top:1px solid #ccc;text-align:center}
 .mybon .my_level .barcode_area img{width:20.3rem;height:8.3rem}
+.mybon .my_level .barcode_area .nopoint_txt{box-sizing:border-box;padding:10px;}
+.mybon .my_level .barcode_area .nopoint_txt p{background:#f1f1f1;padding:20px;font-size:1.4rem;box-sizing:border-box;}
+.mybon .my_level .barcode_area .nopoint_txt a{padding:0.6rem 1rem;display: block;background:#60a224;text-align: center;font-size:1.4rem;color:#fff;margin-top:10px;}
+
 .mybon .mypoint_box{border-bottom:1px solid #ccc;border-top:2px solid #222}
 .mybon .mypoint_box .box{float:left;width:50%;padding:2rem 0;text-align:center}
 .mybon .mypoint_box .box:first-child{border-right:1px solid #ccc}

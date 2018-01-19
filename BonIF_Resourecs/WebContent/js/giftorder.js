@@ -557,6 +557,12 @@ CNTLib.GiftOrder.prototype ={
 			        		submitYN = false;
 			        		
 			        		return false;
+			        	}else if(this.value.length > 11){
+			        		alert("전화번호를 다시 확인하시기 바랍니다.");
+			        		$(this).focus();
+			        		submitYN = false;
+			        		
+			        		return false;
 			        	}
 					});
 					

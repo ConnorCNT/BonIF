@@ -37,6 +37,6 @@ article{position:relative;border:1px solid #ccc}
 .btn-related-post li:after{content:'';display:table;clear:both}
 .btn-related-post li a{float:left;display:inline-block;width:70%;height:3.7rem;line-height:3.7rem;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal}
 .btn-related-post li a:before{margin-right:1.5rem}
-.btn-related-post li a.btn-prev-post:before{content:"�씠�쟾湲�"}
-.btn-related-post li a.btn-next-post:before{content:"�떎�쓬湲�"}
+.btn-related-post li a.btn-prev-post:before{content:"이전글"}
+.btn-related-post li a.btn-next-post:before{content:"다음글"}
 .btn-related-post li span{float:right;display:inline-block;color:#333;height:3.7rem;line-height:3.7rem}

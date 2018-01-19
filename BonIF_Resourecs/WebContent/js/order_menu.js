@@ -161,9 +161,7 @@ function selectMenu(){
 									if(seq == v.pdid){
 										$.each($.parseJSON(v.oppos1), function(k,v){
 											if(v.master_code != ""){
-												if(v.sale == 'y'){
-													html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
-												}
+											html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
 											}
 										});
 									}
@@ -270,9 +268,7 @@ function selectMenu(){
 										if(v.oplistnum == '1'){
 											$.each($.parseJSON(v.oppos1), function(k,v){
 												if(v.master_code != ""){
-													if(v.sale == 'y'){
-														html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
-													}
+												html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
 												}
 											});
 										}

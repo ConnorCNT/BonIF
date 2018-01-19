@@ -12,9 +12,15 @@ var bdnum = null;
 
 $(document).ready(function(){
 	var part = $("input[name=part]").val();
-	packing();
-	$(".packing_wraper").show();
-	jusotitle = "road"
+	if(part == "3"){
+		delivery();
+		jusotitle = "road"
+	}else{
+		$(".packing_wraper").show();
+		//$(".delivery_wraper").hide();
+		jusotitle = "road"
+	}
+	
 	sidolist();
 });
 function packing(){

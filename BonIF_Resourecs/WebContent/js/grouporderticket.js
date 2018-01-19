@@ -116,13 +116,13 @@ CNTLib.GroupTicket.prototype ={
 				if(this.pagetype=="company") {
 					if(!$("#agree1").is(".checked")){
 						$("#agree1_focus").focus();
-						alert("개인정보처리방침에 동의하셔야 합니다.");
+						alert("개인정보취급방침에 동의하셔야 합니다.");
 						return false;
 					}
 				} else if(this.pagetype=="ticket") {
 					if(!$("#agree2").is(".checked")){
 						$("#agree2_focus").focus();
-						alert("개인정보처리방침에 동의하셔야 합니다.");
+						alert("개인정보취급방침에 동의하셔야 합니다.");
 						return false;
 					}
 				}
