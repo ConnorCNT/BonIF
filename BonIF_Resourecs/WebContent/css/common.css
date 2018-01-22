@@ -1364,7 +1364,9 @@ margin:0;}
 .pop_main .pop_contents .today_close .pop_close{top:0px;}
 .pop_main .popup_header {position: relative;}
 
-
+/* egift카드 등록 팝업 */
+.egift_reg ul li{position: relative;box-sizing:border-box;padding-left:100px;}
+.egift_reg ul li span{position: absolute;left:0;top:0;line-height:3.8rem;font-size:1.3rem;}
 
 /*********** [ Plugins ] *************************************************************/
 
@@ -1412,6 +1414,9 @@ margin:0;}
 	.layer2 .contents div span{padding-right:70px;}
 	.layer2 .contents div span a{width:60px;}
 	.layer2 .contents div span a em{font-size:12px;}
+	
+	/* egift카드 등록 */
+	.egift_reg ul li{padding-left:80px;}
 }
 @media all and (max-width:320px){
 	html{font-size:10px}
