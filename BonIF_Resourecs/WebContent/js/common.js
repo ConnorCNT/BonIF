@@ -309,3 +309,28 @@ function setCookie (name,value,expiredays){
   document.cookie = cookie;
 }
 
+function scrollOn(tar, navi, range){
+	$(window).bind('load scroll resize',function(){
+		var winH = $(window).height(),
+			scrollTop = $(this).scrollTop(),
+			center = scrollTop+(winH/2),
+			start = center-(range/2),
+			end = center+(range/2);
+
+		$(tar).each(function(e){
+			var secH = $(this).outerHeight(),
+				secS = $(this).offset().top,					
+				secE = secS+secH;
+			
+			if(secS <= end && secE >= start){
+				$(this).addClass('on');
+			}else{
+				$(this).removeClass('on');
+			}
+
+			if(center >= secS){
+				$(navi).eq(e).addClass('on').siblings().removeClass('on');
+			}
+		});
+	});	
+}

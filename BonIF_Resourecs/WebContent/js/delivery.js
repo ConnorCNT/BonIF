@@ -12,17 +12,68 @@ var bdnum = null;
 
 $(document).ready(function(){
 	var part = $("input[name=part]").val();
-	if(part == "3"){
-		delivery();
-		jusotitle = "road"
-	}else{
-		$(".packing_wraper").show();
-		//$(".delivery_wraper").hide();
-		jusotitle = "road"
-	}
-	
+	packing();
+	$(".packing_wraper").show();
+	jusotitle = "road"
 	sidolist();
 });
+
+$(document).on("click",".addr_list",function(e){ 
+	var el = $(e.target);
+	var seq = el.parent().find("input").attr("value");
+	var param = [];
+	var userSeq = $("input[name=userSeq]").val();
+	param.push("id=Address");
+	param.push("ac=selectDeliveryCheck");
+	param.push("userseq="+userSeq);
+	param.push("seq="+seq);
+	$.ajax({
+		url: "/api.do",
+		method: "post",
+		data : param.join('&'),
+		dataType : 'jsonp',
+		success: function(data) {
+			$.each(data, function(k,v){
+				var x,y
+				x = v.point_x;
+				y = v.point_y;
+				$(".accordion-content").removeClass("active");
+				$(".accordion-content").addClass("hide");
+				findStore(x,y,seq);
+			});
+		}
+	});
+ });
+
+
+$(document).on("click",".recent_list",function(e){ 
+	var el = $(e.target);
+	var seq = el.parent().find("input[name=seq]").attr("value");
+	var param = [];
+	var userSeq = $("input[name=userSeq]").val();
+	param.push("id=Address");
+	param.push("ac=selectDeliveryCheck");
+	param.push("userseq="+userSeq);
+	param.push("seq="+seq);
+	$.ajax({
+		url: "/api.do",
+		method: "post",
+		data : param.join('&'),
+		dataType : 'jsonp',
+		success: function(data) {
+			$.each(data, function(k,v){
+				var x,y
+				x = v.point_x;
+				y = v.point_y;
+				$(".accordion-content").removeClass("active");
+				$(".accordion-content").addClass("hide");
+				findStore(x,y,seq);
+			});
+		}
+	});
+	
+});
+
 function packing(){
 	$(".packing_wraper").show();
 	$(".delivery_wraper").hide();
@@ -127,13 +178,13 @@ function roadAddrPut(){
 			}else{
 				html +='<table>'
 				+'<colgroup>'
-				+'<col style="width:4rem">'
+				+'<col>'
 				+'<col>'
 				+'<col>'
 				+'</colgroup>'
 				+'<tbody class="addr_list">'
 				+'<tr>'
-				+'<td class="text_center">등록된 배송지가 없습니다.<br>배송지를 추가/입력해 주세요</td>'
+				+'<td class="text_center" style="width: 100%">등록된 배송지가 없습니다.<br>배송지를 추가/입력해 주세요</td>'
 				+'</tr>'
 				+'</tbody>'
 				+'</table>'
@@ -212,7 +263,7 @@ function findStore(x,y,adcd){
 				$("#"+tab+" #branch_list").html("");
 				$("#"+tab+" #branch_list").append(html);
 			}else{
-				html +='<p>배송지 주소를 선택 또는 입력 하시면 배달 가능한 매장을 확인하실 수 있습니다.</p>';
+				html +='<p class="text_center">배송지 주소를 선택 또는 입력 하시면<br>배달 가능한 매장을 확인하실 수 있습니다.</p>';
 				
 				$(".selectStoreSeq").prop("href","javascript:nonStore();");
 				$("#"+tab+" #branch_list").html("");
@@ -809,7 +860,7 @@ function recentAddr(){
 			+'<div class="store_tag">'
 			+'</div>'
 			+'<a href="javascript:void(0);" id="branch_list" id="zxdsok-accordion-label">'
-			+'<p>배송지 주소를 선택 또는 입력 하시면 배달 가능한 매장을 확인하실 수 있습니다.</p>'
+			+'<p class="text_center">배송지 주소를 선택 또는 입력 하시면<br>배달 가능한 매장을 확인하실 수 있습니다.</p>'
 			+'</a>'
 			+'<div class="accordion-content hide" >'
 			+'<div id="map2" style="width:100%;height:192px;"></div>'
@@ -837,8 +888,9 @@ function seldefault(){
 		data : param.join('&'),
 		dataType : 'jsonp',
 		success: function(data) {
-			//console.log(data);
-			if(data[0].result > 1){
+			console.log(data);
+			console.log(data[0].result > 1);
+			if(data[0].result >= 1){
 				var param = [];
 				param.push("id=Address");
 				param.push("ac=updateDefaultDeliver");
@@ -859,7 +911,7 @@ function seldefault(){
 					}
 				});
 			}else{
-				//console.log("기본 배송지 초기화 실패");
+				console.log("기본 배송지 초기화 실패");
 			}
 		}
 	});

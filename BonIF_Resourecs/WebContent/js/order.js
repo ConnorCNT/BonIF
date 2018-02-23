@@ -996,7 +996,7 @@ CNTLib.Delivery.prototype = {
 						}
 						if(ev.op1val1 != null && ev.op1val1 != ""){
 							$.each(JSON.parse(ev.op1val1), function(k,v){
-								html +='<br/>('+v.topping_name+'<em class="f_orange font_space"> '+v.count+') </em>'
+								html +='<br/>&nbsp;&nbsp;-&nbsp;&nbsp;'+v.topping_name+'<em class="f_orange font_space"> ('+v.count+') </em>'
 								topping_price += (Number(v.count) * Number(v.price));
 							});
 							totprice +=Number(ev.pdcnt * topping_price);
@@ -1047,6 +1047,7 @@ CNTLib.Delivery.prototype = {
 		param.push("cartid="+CNTApi.getCartId());
 		
 		//alert(CNTApi.getCartId());
+		var totqty = 0;
 		
 		if( CNTApi.getCartId() == "0" ){ alert("카트 정보가 없습니다."); window.history.back(-1); }
 
@@ -1070,6 +1071,7 @@ CNTLib.Delivery.prototype = {
 						var topping_price = 0;	
 						var ev = data[i];
 						totprice = Number(totprice) + Number(ev.pdcnt * ev.cartamount);
+						totqty +=Number(ev.pdcnt);
 						
 						if ("BD100001" == ev.op1pos1) {
 							continue;
@@ -1080,23 +1082,23 @@ CNTLib.Delivery.prototype = {
 						if(ev.op1val2 != null && ev.op1val2 != ""){
 							$.each(JSON.parse(ev.op1val2), function(k,v){
 								console.log(v);
-								html +='('+v.packing_name
+								html +='('+v.packing_name+')';
 							});
 						}
 						if(ev.op1val1 != null && ev.op1val1 != ""){
 							$.each(JSON.parse(ev.op1val1), function(k,v){
-								html +=''+v.topping_name+'<em class="f_orange font_space"> '+v.count+' </em>'
+								html +='<br/>&nbsp;&nbsp;-&nbsp;&nbsp;'+v.topping_name+'<em class="f_orange font_space"> ('+v.count+') </em>'
 								topping_price += (Number(v.count) * Number(v.price));
 							});
 							totprice +=Number(ev.pdcnt * topping_price);
 						}
-						html +=')</strong>'
+						html +='</strong>'
 						+'<div class="item_count">'
 						+'<a href="javascript:void(0);" class="btn_minus" onClick="cMin('+ev.detailid+');">―</a><span class="input_text"><input type="text" value="'+ev.pdcnt+'" id="pd_cnt_'+ev.detailid+'" readOnly="true"></span>'
 						+'<a href="javascript:void(0);" class="btn_plus" onClick="cPlus('+ev.detailid+');">+</a>'
-						+'</div></td>'
+						+'<a href="javascript:void(0)" class="btn_del btn_order" onClick="condel('+ev.detailid+');"><span class="blind">삭제</span></a></div></td>'
 						+'<td><p class="text-right f_orange font_space f30">'+numberWithCommas(Number(ev.cartamount)+Number(topping_price))+'원</p></td>'
-						//+'<td><p class="text-right f_orange font_space f30">'+numberWithCommas(ev.pdcnt * (Number(ev.cartamount)+Number(topping_price)))+'원<a href="javascript:condel('+ev.detailid+');" class="btn_del btn_order"><span class="blind">삭제</span></a></p></td>'
+						//+'<td><p class="text-right f_orange font_space f30">'+numberWithCommas(ev.pdcnt * (Number(ev.cartamount)+Number(topping_price)))+'원</p></td>'
 						+'</tr>'
 					}
 					
@@ -1115,6 +1117,22 @@ CNTLib.Delivery.prototype = {
 					$(".content").append(html);
 					$(".totAmt").text(numberWithCommas(Number(totprice))+"원");
 					
+					
+					if(totqty >= 30){
+						$(".btn_payment").unbind().bind("click", function(e){
+							if(confirm("30개 이상 주문은 단체주문 페이지에서 접수해주시기 바랍니다.\n단체주문 페이지로 이동 하시겠습니까?")){
+								location.href="/group/order_home";
+							}
+							return;
+						});
+					}
+					else{
+						$(".btn_payment").unbind().bind("click", function(e){
+							e.preventDefault();
+							orderv.PackingOrderStep01();
+						});
+					}
+					
 				}else{
 					html +='<tr class="nolist">'
 						+'<td colspan="3"><p>주문표에 담긴 <br>메뉴가 없습니다.</p></td>'
@@ -1124,6 +1142,7 @@ CNTLib.Delivery.prototype = {
 			}
 		});
 	},
+	
 	getOrderInfo : function(){
 		$(".contentList").empty();
 		var userseq = $("#userSeq").val();
@@ -1157,7 +1176,7 @@ CNTLib.Delivery.prototype = {
 						
 						$(".chainInfo").append("");
 						html = ev.chainname + '<br>' + ev.addr1 + '&nbsp;' + ev.addr2;
-						html += '<a href="'+ ev.tel1 +'" class="btn_phone"><span class="blind">전화</span></a>'
+						html += '<a href="tel:'+ ev.tel1 +'" class="btn_phone"><span class="blind">전화</span></a>'
 											
 						var userName = $("#userName").val();
 						var userHp = $("#userTel1").val()+"-" + $("#userTel2").val() + "-" + $("#userTel3").val();
@@ -1174,7 +1193,7 @@ CNTLib.Delivery.prototype = {
 							$(".ordertype").html("배달 주문하기");
 							$(".chainType").text("배달매장");
 							$(".txt_address").parent().parent().show();
-							$(".txt_address").html('<span class="font_space">'+ ev.fulladdr +'</span><a href="/order/deliver_popup_post?part=3" class="btn gray" style="margin-left:21px">배송지변경</a>');
+							$(".txt_address").html('<span class="font_space">'+ ev.fulladdr +'</span><a href="/order/orderType?part=3&ordertype=D" class="btn gray">배송지변경</a>');
 						}
 					}
 					
@@ -1192,6 +1211,63 @@ CNTLib.Delivery.prototype = {
 		var totAmt = $(".totAmt");
 		
 		var isAmt = true;
+		
+		//매장 상태 체크
+		if( CNTApi.getStoreInfo(CNTApi.getStoreId()) ){
+			if(CNTApi.setStoreInfo()) {
+				if(StoreInfo.store_del_mk == "L"){
+					var retmsg = CNTApi.checkPosStore();
+					console.log("매장상태는:"+retmsg);
+					if(retmsg != "1") {
+						alert(retmsg);
+						return;
+					}
+				}else{
+					alert("본주문이 불가한 매장입니다.");
+					return;
+				}
+			} else {
+				alert("매장정보 설정 중 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
+				return;
+			}
+		} else {
+			alert("매장정보 설정중 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
+			return;
+		}
+
+		//메뉴 결품 체크
+		var isMenu = true;
+		
+		var param = [];
+		param.push("ex=Order");
+		param.push("ac=getvposstorecmdtlocal");
+		param.push("cartid="+CNTApi.getCartId());
+
+		var self = this;
+		$.ajax({
+			type: 'get',
+			url : "/api.do",
+			data : param.join('&'),
+			dataType : 'jsonp',
+			async:false,
+			error:function(){
+				console.log("error");
+				isMenu = false;
+			},
+			success: function(data){
+				//console.log(data);
+				if(data[0].result == "0"){
+					isMenu = false;
+					alert("선택하신 메뉴 중 " + data[0].message + "은(는) 현재 해당 매장에서 주문하실 수 없습니다.");
+					location.href = "/order/packing/order";
+					return;
+				}
+			}
+		});
+		
+		if( !isMenu ){
+			return;
+		}
 		
 		if (CNTApi.getCartId() != 0) {
 			CNTApi.log("cartInfo");
@@ -1232,6 +1308,11 @@ CNTLib.Delivery.prototype = {
 						return;
 					}
 					
+					if( $("#packTel").val().replace(/,/g, "").length < 10 ){
+						alert("주문 고객님의 핸드폰번호가 정확하지 않습니다.");
+						return;
+					}
+					
 					reciptTel = $("#packTel").val().replace(/,/g, "");
 					
 					var DIRECTION = $('#DIRECTION').val();
@@ -1239,7 +1320,9 @@ CNTLib.Delivery.prototype = {
 					if (typeof DIRECTION == 'undefined' || DIRECTION == null) {
 						DIRECTION = '';
 					}
-
+					
+					var userseq = UserInfo.user_no;
+					
 					var param = [];
 					param.push("ex=Order");
 					param.push("ac=PackingOrderStep01");
@@ -1247,6 +1330,7 @@ CNTLib.Delivery.prototype = {
 					param.push("RECIPTNAME="+encodeURI($("#reciptName").val()));
 					param.push("DIRECTION="+encodeURI(DIRECTION));
 					param.push("cartid="+CNTApi.getCartId());
+					param.push("userseq="+userseq);
 					
 					if( CNTApi.getCartId() == "0" ){ alert("카트 정보가 없습니다."); window.history.back(-1); }
 
@@ -1280,12 +1364,12 @@ CNTLib.Delivery.prototype = {
 	completeOrder : function() {
 		//apiutil.log("==completeOrder");
 		
-		
+		CNTApi.getUserInfo();
 		var param = [];
 		param.push("ex=Order");
 		param.push("ac=completeorder");
 		param.push("cartid=" + CNTApi.getCartId());
-
+		param.push("userseq=" + UserInfo.user_no);
 
 		var self = this;
 		$.ajax({
@@ -1294,10 +1378,6 @@ CNTLib.Delivery.prototype = {
 			data : param.join('&'),
 			dataType : 'jsonp',
 			async:false,
-			error:function(){
-				self.nowUpdate = false;
-				alert('에러:데이터 송수신에 문제가 있습니다.');
-			},
 			success : function(data) {
 				self.nowUpdate = false;
 				if (data != null) {
@@ -1319,88 +1399,74 @@ CNTLib.Delivery.prototype = {
 			}
 		});
 	},
-
-	
-	updateOrderData22 : function() {
-		//apiutil.log("updateOrderData");
-		this.nowUpdate = true;
-		var orderdate = null;
-		var ordertime = null;
-		var ordertype = null;
-		var cartid = CNTApi.getCartId();
-		
-		var addAddrString = ''
-		var paycode = null;
-		
-		var paytype = "BCARD";
-		paycode = "03";
-		//var addDirectionStr = '[선결제카드]';
-
-		var cardseq = null;
-		var cardamount = 0;
-		var cashamount = 0;
-		var couponamount = 0;
-		if (paytype == "BCARD") {
-			cardamount = 0;
-		}
-
-		var orderexefrm = document.orderexefrm;
-		orderexefrm.cartid.value = cartid;
-		orderexefrm.ordertype.value = "P";
-		orderexefrm.orderdate.value = orderdate;
-		orderexefrm.ordertime.value = ordertime;
-		orderexefrm.paytype.value = paytype;
-		orderexefrm.paycode.value = paycode;
-		orderexefrm.cardseq.value = "0";
-		orderexefrm.cardamount.value = cardamount;
-		orderexefrm.cashamount.value = cashamount;
-		//orderexefrm.direction.value = addDirectionStr;
-		
-		
-		var self = this;
-		//var sandForm = formEncript($('#orderexefrm'));
-		
-		$.post("/api.do", $('#orderexefrm').serialize(), function(data) {
-			//apiutil.log(data);
-			if (data != null) {
-				try {
-					self.nowUpdate = false;
-					if (typeof data[0].result !== "undefiend") {
-						if (data[0].result == 1) {
-							if (paytype == "BCARD") {
-								self.completeOrder();
-							} else {
-								self.completeOrder();
-							}
-						} else {
-							alert(data[0].message);
-						}
-					} else {
-						alert("주문 처리 응답이 없습니다 !");
-					}
-				} catch (e) {
-					self.nowUpdate = false;
-					alert(e);
-				}
-			}
-		}, 'jsonp');
-
-	},
 	updateOrderData : function() {
 		
-		if(!$(":radio[name='category']").parents("div.radio_box").hasClass("on")){
-			alert("결제방법을 선택해주세요.");
-			return false;
+		if (parseInt($("#totalpayamount").text().replace(/,/g, "")) > 0 ){
+			if(!$(":radio[name='category']").parents("div.radio_box").hasClass("on")){
+				alert("결제방법을 선택해주세요.");
+				return false;
+			}
+			
+			if(!$('.card_list').hasClass("hide") && $("select#card_list").find("option:selected").val() == ""){
+				alert("카드사를 선택해주세요.");
+				return false;
+			}
 		}
 		
-		if(!$('.card_list').hasClass("hide") && $("select#card_list").find("option:selected").val() == ""){
-			alert("카드사를 선택해주세요.");
-			return false;
-		}
 		
 		if(!$(":checkbox[id='form-saveid']").parents("label.custom-chkbox").find("span.checkbox").hasClass("checked")){
 			alert("주문동의에 체크해주세요.");
 			return false;
+		}
+		
+		/*
+		 * 현금 영수증 관련 내용
+		 */
+		var cashRecpyn = "N";
+		var tr_code = "";
+		var id_info = "";
+		
+		if(!$("#mod_com_list").hasClass('hide')){
+			cashRecpyn = "Y";
+			var num = "";
+			if($(".persnal").hasClass('on')){
+				
+				num += $("#txtphnnum1").val().replace(/,/g, "");
+				
+				if(($("#txtphnnum2").val().replace(/,/g, "") == "") || ($("#txtphnnum3").val().replace(/,/g, "") == "")){
+					alert("전화 번호를 정확히 입력하세요");
+					return;
+				}
+				if(($("#txtphnnum3").val().replace(/,/g, "").length < 3) || ($("#txtphnnum3").val().replace(/,/g, "").length != 4)){
+					alert("전화 번호를 정확히 입력하세요");
+					return;
+				}
+				
+				num += $("#txtphnnum2").val().replace(/,/g, "");
+				num += $("#txtphnnum3").val().replace(/,/g, "");
+				
+				id_info = num;
+				
+				tr_code = "0";
+			}
+			else{
+				
+				if(($("#txtcompnum1").val().replace(/,/g, "") == "") || ($("#txtcompnum2").val().replace(/,/g, "") == "") || ($("#txtcompnum3").val().replace(/,/g, "") == "")){
+					alert("사업자 번호를 정확히 입력하세요");
+					return;
+				}
+				if(($("#txtcompnum1").val().replace(/,/g, "").length != 3) || ($("#txtcompnum2").val().replace(/,/g, "").length != 2) || ($("#txtcompnum3").val().replace(/,/g, "")).length != 5){
+					alert("사업자 번호를 정확히 입력하세요");
+					return;
+				}
+				num += $("#txtcompnum1").val().replace(/,/g, "");
+				num += $("#txtcompnum2").val().replace(/,/g, "");
+				num += $("#txtcompnum3").val().replace(/,/g, "");
+				
+				tr_code = "1";
+				
+				id_info = num;
+			}
 		}
 		
 		//매장 상태 체크
@@ -1460,57 +1526,11 @@ CNTLib.Delivery.prototype = {
 			return;
 		}
 		
-		/*
-		 * 현금 영수증 관련 내용
-		 */
-		var cashRecpyn = "N";
-		var tr_code = "";
-		var id_info = "";
 		
-		if(!$("#mod_com_list").hasClass('hide')){
-			cashRecpyn = "Y";
-			var num = "";
-			if($(".persnal").hasClass('on')){
-				
-				num += $("#txtphnnum1").val().replace(/,/g, "");
-				
-				if(($("#txtphnnum2").val().replace(/,/g, "") == "") || ($("#txtphnnum3").val().replace(/,/g, "") == "")){
-					alert("전화 번호를 정확히 입력하세요");
-					return;
-				}
-				if(($("#txtphnnum3").val().replace(/,/g, "").length < 3) || ($("#txtphnnum3").val().replace(/,/g, "").length != 4)){
-					alert("전화 번호를 정확히 입력하세요");
-					return;
-				}
-				
-				num += $("#txtphnnum2").val().replace(/,/g, "");
-				num += $("#txtphnnum3").val().replace(/,/g, "");
-				
-				id_info = num;
-				
-				tr_code = "0";
-			}
-			else{
-				
-				if(($("#txtcompnum1").val().replace(/,/g, "") == "") || ($("#txtcompnum2").val().replace(/,/g, "") == "") || ($("#txtcompnum3").val().replace(/,/g, "") == "")){
-					alert("사업자 번호를 정확히 입력하세요");
-					return;
-				}
-				if(($("#txtcompnum1").val().replace(/,/g, "").length != 3) || ($("#txtcompnum2").val().replace(/,/g, "").length != 2) || ($("#txtcompnum3").val().replace(/,/g, "")).length != 5){
-					alert("사업자 번호를 정확히 입력하세요");
-					return;
-				}
-				num += $("#txtcompnum1").val().replace(/,/g, "");
-				num += $("#txtcompnum2").val().replace(/,/g, "");
-				num += $("#txtcompnum3").val().replace(/,/g, "");
-				
-				tr_code = "1";
-				
-				id_info = num;
-			}
-		}
 		
 		//apiutil.log("updateOrderData");
+		CNTApi.getUserInfo();
+		
 		this.nowUpdate = true;
 		var orderdate = null;
 		var ordertime = null;
@@ -1530,18 +1550,38 @@ CNTLib.Delivery.prototype = {
 		var couponamount = 0;
 		
 		var pointamount = $("#totalpointprice").text().replace(/,/g, "");
+		var couponamount = $("#totalcouponprice").text().replace(/,/g, "");
+		var couponseq = $("#couponSeq").val();
+		var egiftamount = $("#totalegiftprice").text().replace(/,/g, "");
+		var totalorderprice = $("#totalorderprice").text().replace(/,/g, "");
+		var totalpayamount = $("#totalpayamount").text().replace(/,/g, "");
 		
-		paytype = $("div.radio_box.on").find(":radio[name='category']").val();
+		paytype = $("#payList div.radio_box.on").find(":radio[name='category']").val();
 		paycode = $("select#card_list").find("option:selected").val();
 		
-		if(parseInt($("#totalpayamount").text().replace(/,/g, "")) > 0 && parseInt($("#totalpayamount").text().replace(/,/g, "")) < 1000){
-			alert("포인트 사용시 총 결제금액이 0원이 아니면 최소 결제금액은 1,000원 이상이어야 합니다.");
+		if(paytype == ""){
+			paytype = "card";
+		}
+		
+		if(parseInt($("#totalpayamount").text().replace(/,/g, "")) > 0 && parseInt($("#totalpayamount").text().replace(/,/g, "")) < 1){
+			alert("포인트 사용시 총 결제금액이 0원이 아니면 최소 결제금액은 1원 이상이어야 합니다.");
 			return;
+		}
+
+		//포인트 전액 결제 추가
+		if (parseInt(totalpayamount) == 0 && parseInt( pointamount ) == parseInt(totalorderprice)){
+			paytype = "point";
+			paycode = "";
 		}
 		
 		//포인트 전액 결제 추가
-		if (parseInt($("#totalpayamount").text().replace(/,/g, "")) == 0 ){
-			paytype = "point";
+		if (parseInt(totalpayamount) == 0 && parseInt( couponamount ) == parseInt(totalorderprice)){
+			paytype = "coupon";
+			paycode = "";
+		}
+		
+		if (parseInt(totalpayamount) == 0 && parseInt( egiftamount ) == parseInt(totalorderprice)){
+			paytype = "giftcard";
 			paycode = "";
 		}
 
@@ -1555,11 +1595,15 @@ CNTLib.Delivery.prototype = {
 		orderexefrm.cardamount.value = cardamount;
 		orderexefrm.cashamount.value = cashamount;
 		orderexefrm.pointamount.value = pointamount;
-		//orderexefrm.direction.value = addDirectionStr;
+		orderexefrm.couponamount.value = couponamount;
+		orderexefrm.couponseq.value = couponseq;
+		orderexefrm.giftcard_number.value = $("#giftcard_number").val();
+		orderexefrm.giftcard_price.value =egiftamount;
 		
 		orderexefrm.cashrecpt_yn.value = cashRecpyn;
 		orderexefrm.userflag.value = tr_code;
 		orderexefrm.idnum.value = id_info;
+		orderexefrm.userseq.value = UserInfo.user_no;
 		
 		var self = this;
 		
@@ -1573,17 +1617,16 @@ CNTLib.Delivery.prototype = {
 							alert(data[0].message);
 						}else{
 							//포인트 전액 결제 추가
-							if (data[0].totpayamount == 0 && parseInt( pointamount ) > 0){
+							if (data[0].totpayamount == 0 && (parseInt( pointamount ) > 0 || parseInt( couponamount ) > 0 || parseInt( egiftamount ) > 0)){
 								self.completeOrder();
 								return;
 							}
 							
 							var $frm = $("form#kcpForm");
+							var paytype = $("#payList div.radio_box.on").find(":radio[name='category']").val();
 							
-							$frm.find("input#pay_type").val($("div.radio_box.on").find(":radio[name='category']").val());
-//							$frm.find("input#coupon_price").val($("#totalcouponprice").text().replace(/,/g, ""));
+							$frm.find("input#pay_type").val(paytype);
 							$frm.find("input#point_price").val($("#totalpointprice").text().replace(/,/g, ""));
-//							$frm.find("input#giftcard_price").val($("#giftcard_price").text().replace(/,/g, ""));
 							$frm.find("input#total_pay_amount").val($("#totalpayamount").text().replace(/,/g, ""));
 							$frm.find("input#card_cd").val($("select#card_list").find("option:selected").val());
 							
@@ -1591,14 +1634,12 @@ CNTLib.Delivery.prototype = {
 							$frm.find("input#good_name").val(data[0].detailname);
 							$frm.find("input#good_mny").val(data[0].totpayamount);
 							$frm.find("input#buyr_name").val(data[0].username);
-							$frm.find("input#buyr_mail").val("");
-							//$frm.find("input#buyr_mail").val(UserInfo.user_email);
+							$frm.find("input#buyr_mail").val(UserInfo.user_email);
 							$frm.find("input#buyr_tel1").val(data[0].usertel);
 							$frm.find("input#buyr_tel2").val(data[0].usertel);
+							$frm.find("input#userseq").val(UserInfo.user_no);
 							
-//							window.open("", "popup_kcp", "width=1000, height=800, scrollbars=no");
-							
-							if(!$('.card_list').hasClass("hide") && $("select#card_list").find("option:selected").val() != ""){
+							if(paytype == "card"){
 								$frm.attr("action", "/order/kcp/smarthub/packing/order_pay");
 							}else{
 								$frm.attr("action", "/order/kcp/packing/order_mobile");
@@ -1622,13 +1663,15 @@ CNTLib.Delivery.prototype = {
 		console.log(CNTApi.getCompleteId());
 		if (CNTApi.getCompleteId() != 0) {
 			CNTApi.log("loadCart");
+			
+			CNTApi.getUserInfo();
+			var userseq = UserInfo.user_no;
 			var param = [];
 			param.push('ex=Order');
 			param.push('ac=PackingComplete');
 			param.push('masterseq=' + CNTApi.getCompleteId());
-			//param.push('userseq=' + '');
-			
-			
+			param.push('userseq=' + userseq);
+
 			var self = this;
 			$.ajax({
 				type : 'get',
@@ -1670,7 +1713,7 @@ CNTLib.Delivery.prototype = {
 			$("#order_type_info").text("매장정보");
 			$("#packing_info").show();
 			$("#order_type").html("");
-			$("#order_type").append("<span class='color_green'>방문포장주문이 완료되었습니다.</span><br/>예약하신 시간에 맞추어 매장을 방문하여 수령해주시기 바랍니다.");
+			$("#order_type").append("<span class='color_green'>방문포장주문이 완료되었습니다.</span><br/>매장을 방문하여 수령해주시기 바랍니다.");
 			$(".ordertype").empty();
 			$(".ordertype").html("방문포장");
 		}else{
@@ -1735,9 +1778,15 @@ CNTLib.Delivery.prototype = {
 					paytype = "계좌이체";
 				else if(ev[i].paytype == "point")
 					paytype = "포인트";
+				else if(ev[i].paytype == "coupon")
+					paytype = "쿠폰";
+				else if(ev[i].paytype == "giftcard")
+					paytype = "기프트카드";
 				
 				$(".totOrderamount").text(numberWithCommas(Number(ev[i].totorderamount)) + "원");
 				$(".usepointamount").text(numberWithCommas(Number(ev[i].pointamount)) + "원");
+				$(".usecouponamount").text(numberWithCommas(Number(ev[i].couponamount)) + "원");
+				$(".useegfitamount").text(numberWithCommas(Number(ev[i].egift_amount)) + "원");
 				$(".paytype").text(paytype);
 				$(".totPayamount").text(numberWithCommas(Number(ev[i].totpayamount)) + "원");
 				$(".addpointamount").text(numberWithCommas(Number(ev[i].sp_pnt_add)) + "P");
@@ -1758,22 +1807,24 @@ CNTLib.Delivery.prototype = {
 		
 		CNTApi.setCartId(0);
 	},
-	orderReset : function() {
-		//CNTApi.setCartId(0);
-		location.href="/order/menu?part="+CNTApi.menuSelectPage();
+	orderReset : function(part,ordertype) {
+		location.href="/order/menu?part="+part+"&ordertype="+ordertype;
 	},
 	orderReset2 : function() {
-		if(confirm("장바구니가 초기화 됩니다. 계속 하시겠습니까?")){
+		if(confirm("주문하신 내용이 삭제됩니다.\n다시 주문하시겠습니까?")){
 			CNTApi.setCartId(0);
 			location.href="/order/main";
 		}
 	},
 	myOrderList : function(seq) {
 
+		CNTApi.getUserInfo();
+		var userseq = UserInfo.user_no;
+		
 		var param = [];
 		param.push('ex=Order');
 		param.push('ac=myOrderList');
-		param.push('userseq=' + seq);
+		param.push('userseq=' + userseq);
 		
 		
 		if( seq == 0 ){
@@ -1831,6 +1882,9 @@ CNTLib.Delivery.prototype = {
 	//mypage/order_packing List
 	loadPackOrder2 : function() {
 
+		CNTApi.getUserInfo();
+		var userseq = UserInfo.user_no;
+		
 		console.log(CNTApi.getCompleteId());
 		if (CNTApi.getCompleteId() != 0) {
 			CNTApi.log("loadCart");
@@ -1838,7 +1892,7 @@ CNTLib.Delivery.prototype = {
 			param.push('ex=Order');
 			param.push('ac=PackingComplete');
 			param.push('masterseq=' + CNTApi.getCompleteId());
-			//param.push('userseq=' + '');
+			param.push('userseq=' + userseq);
 			
 			
 			var self = this;
@@ -1908,9 +1962,13 @@ CNTLib.Delivery.prototype = {
 							$(".totAmout").html(numberWithCommas(Number(ev[i].totorderamount)) + "원");
 							$(".totpayAmout").html(numberWithCommas(Number(ev[i].totpayamount)) + "원");
 							$(".pointprice").html(numberWithCommas(Number(ev[i].pointamount)) + "원");
-							$(".couponprice").html(numberWithCommas(0) + "원");
+							$(".couponprice").html(numberWithCommas(Number(ev[i].couponamount)) + "원");
+							$(".egiftprice").html(numberWithCommas(Number(ev[i].egift_amount)) + "원");
 							
-							$(".disprice").html(numberWithCommas(Number(ev[i].pointamount)) + "원");
+							var discount = Number(ev[i].couponamount)+Number(ev[i].pointamount)+Number(ev[i].egift_amount);
+							
+							$(".disprice").html(numberWithCommas(Number(discount)) + "원");
+							
 							$(".addpointprice").html(numberWithCommas(Number(ev[i].sp_pnt_add)) + "P");
 							
 							
@@ -1929,6 +1987,11 @@ CNTLib.Delivery.prototype = {
 								paytype = "(계좌이체)";
 							else if(ev[i].paytype == "point")
 								paytype = "(포인트)";
+							else if(ev[i].paytype == "coupon")
+								paytype = "(쿠폰)";
+							else if(ev[i].paytype == "giftcard")
+								paytype = "(기프트카드)";
+							
 							$(".paytype").html(paytype);
 							
 							if (ev[i].ordertype == 'R') {
@@ -2022,9 +2085,7 @@ CNTLib.Delivery.prototype = {
 				}
 				
 				alert("등록 되었습니다.");
-				
-				$(".btnPointPop").addClass('hide');
-				$('#pop_point_card').hide();
+				window.location.reload();
 				
 				return true;
 			}
@@ -2065,8 +2126,7 @@ CNTLib.Delivery.prototype = {
 				
 				alert("발급 되었습니다.");
 				
-				$(".btnPointPop").addClass('hide');
-				$('#pop_point_card').hide();
+				window.location.reload();
 				return true;
 			}
 		});
@@ -2396,6 +2456,7 @@ CNTLib.Delivery.prototype = {
 		CNTApi.getUserInfo();
 		
 		var userseq = UserInfo.user_no;
+		var brd_no = CNTApi.getStoreSpart();
 		
 		if( userseq == 0 ){
 			alert("로그인 후 확인 하세요.");
@@ -2410,6 +2471,7 @@ CNTLib.Delivery.prototype = {
 		param.push('ex=Coupon');
 		param.push("ac=selectDoMyCouponList");
 		param.push('userseq=' + userseq);
+		param.push('brd_no=' + brd_no);
 		CNTApi.log(param.join('&'));
 		var strhtml ="";
 		
@@ -2448,18 +2510,26 @@ CNTLib.Delivery.prototype = {
 				}
 
 				if( ev != null && ev.length > 0){
+					strhtml += '<li>';
+					strhtml += '	<p class="radio_box">';
+					strhtml += '		<input type="radio" name="couponradio" id="couponradio_" class="input_check" value="0||">';
+					strhtml += '		<span class="fake"></span>';
+					strhtml += '		<label for="couponradio" class="check"><strong class="font_space">쿠폰 사용 안함</label>';
+					strhtml += '	</p>';
+					strhtml += '</li>';
+					
 					for(i = 0; i < ev.length; i++){
 						
-						if( ev[i].msg_subject != ""){
+						if( ev[i].offer_nm != ""){
 							strhtml += '<li>';
 							strhtml += '	<p class="radio_box">';
-							strhtml += '		<input type="radio" name="couponradio" id="couponradio'+i+'" checked="checked" class="input_check" value="'+ev[i].dc_amt+'|'+ev[i].dc_type_cd+'">';
+							strhtml += '		<input type="radio" name="couponradio" id="couponradio'+i+'" checked="checked" class="input_check" value="'+ev[i].dc_amt+'|'+ev[i].dc_type_cd+'|'+ev[i].seq+'">';
 							strhtml += '		<span class="fake"></span>';
 							var range = "원";
 							if( ev[i].dc_type_cd == "02")
 								range = "%";
 	
-							strhtml += '		<label for="couponradio" class="check"><strong class="font_space">'+numberWithCommas(Number(ev[i].dc_amt)) + range +'  할인</strong> - '+ ev[i].msg_subject +'</label>';
+							strhtml += '		<label for="couponradio" class="check"><strong class="font_space">'+numberWithCommas(Number(ev[i].dc_amt)) + range +'  할인</strong> - '+ ev[i].offer_nm +'</label>';
 							strhtml += '	</p>';
 							strhtml += '</li>';
 							
@@ -2474,8 +2544,8 @@ CNTLib.Delivery.prototype = {
 					}
 					
 					$('#couponDiv li .radio_box').click(function(){
-						$(this).parent("li").each(function(index){
-							$(this).removeClass("on");
+						$(this).parents().children("li").each(function(index){
+							$(this).find(".radio_box").removeClass("on");
 						});
 						$(this).addClass("on");
 					});	
@@ -2503,7 +2573,7 @@ CNTLib.Delivery.prototype = {
 		CNTApi.getUserInfo();
 		
 		var userseq = UserInfo.user_no;
-		
+		var brd_no = CNTApi.getStoreSpart();
 		if( userseq == 0 ){
 			alert("로그인 후 확인 하세요.");
 			location.href="/login";
@@ -2517,6 +2587,7 @@ CNTLib.Delivery.prototype = {
 		param.push('ex=Coupon');
 		param.push("ac=selectDoMyCouponList");
 		param.push('userseq=' + userseq);
+		param.push('brd_no=' + brd_no);
 		CNTApi.log(param.join('&'));
 		var strhtml ="";
 		
@@ -2555,7 +2626,7 @@ CNTLib.Delivery.prototype = {
 				if( ev != null && ev.length > 0){
 					for(i = 0; i < ev.length; i++){
 						
-						if( ev[i].msg_subject != ""){
+						if( ev[i].offer_nm != ""){
 							cnt++;
 						}
 						
@@ -2571,6 +2642,7 @@ CNTLib.Delivery.prototype = {
 		var unit = $(".unit").html("원");
 		var totalcouponprice = $("#totalcouponprice").html(0);
 		var cnt = 0;
+		var couponSeq = $("#couponSeq");
 		
 		$('#couponDiv li').each(function(index){
 			if($(this).find("p").hasClass('on') ){
@@ -2580,22 +2652,30 @@ CNTLib.Delivery.prototype = {
 				if( cp_val != ""){
 					var amt = cp_val.split("|")[0];
 					var un = cp_val.split("|")[1];
+					var seq = cp_val.split("|")[2];
 					
 					dc_amt.html(numberWithCommas(Number(amt)));
-					unit.html( (un == "01")?"원":"%" );
+					unit.html( "원" );
 					
 					
 					if( un == "02"){
 						var totalorderprice = parseInt($("#totalorderprice").text().replace(/,/g, ""));
-						
-						totalcouponprice = numberWithCommas(parseInt((totalorderprice / amt) * 100));
-					}else{
+						totalcouponprice.html(numberWithCommas(parseInt((totalorderprice * amt) / 100)));
+						dc_amt.html(numberWithCommas(parseInt((totalorderprice * amt) / 100)));
+					}else if( un == "01"){
 						totalcouponprice.html(numberWithCommas(Number(amt)));
+						dc_amt.html(numberWithCommas(Number(amt)));
+					}else{
+						totalcouponprice.html(0);
+						dc_amt.html(0);
 					}
-					fnCalculate();
+					
+					if( fnCalculate() ){
+						couponSeq.val(seq);
+						$('#pop_couponuse').hide();
+						$('.dimmed').hide();
+					}
 					cnt++;
-					$('#pop_couponuse').hide();
-					$('.dimmed').hide();
 				}
 			}
 		});	

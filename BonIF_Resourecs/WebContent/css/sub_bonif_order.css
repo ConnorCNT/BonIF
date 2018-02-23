@@ -38,6 +38,7 @@
 .order .order_way li.on{background-position:0 0}
 
 .order .btn.bg_gray{display:block;text-align:center;height:4rem;line-height:3.3;background:#666;font-weight:300;color:#fff}
+.order .btn.gray{display:inline-block;text-align:center;line-height:1.6;background:#666;font-weight:300;color:#fff;padding:0.2rem 0.7rem;margin:2px 0 0 10px;}
 .order .btn.bg_gray + .btn.bdr_gray{margin-top:0.5rem}
 .order .btn.bdr_gray{display:block;text-align:center;height:4rem;line-height:3.3;color:#666}
 
@@ -72,14 +73,16 @@
 {position:relative;border:2px solid #60a224;z-index:9}
 .menu_list li.on .product-inner{background-color:#fff;border-bottom:0}
 .order .menu_list li.on .inner:after{content:'';display:block;clear:both;position:absolute;left:0;bottom:0;width:100%;height:2px;background:#fff;margin-bottom:-2px;z-index:2}
-
+.order .menu_list li.sold_out:before{content:'';display: block;position: absolute;left:0;top:0;width:100%;height:100%;background:#000;opacity:.5;}
+.order .menu_list li.sold_out:after{content:'일시품절';width:100%;font-size:1.5rem;line-height:30px;margin-top:-15px;position: absolute;left:0;top:50%;text-align: center;color:#fff;}
 .menu_list li.on .product-inner .thumb{border:0}
 
 .order .menu_list li.on:nth-child(even) .inner{margin-left:-2px}
 .order .menu_list .thumb{text-align:center;border-bottom:1px dotted #ccc}
 .order .menu_list .thumb .img{display:inline-block;width:14.5rem;height:14.5rem;background-position:center center;background-repeat:no-repeat;background-size:contain}
-.order .menu_list .description{padding:1.5rem;font-size:1.3rem}
-.order .menu_list .description .name{display:block;min-height:60px}
+.order .menu_list .description{padding:1.5rem 1.5rem 5px;font-size:1.3rem;min-height:160px; }
+.order .menu_list .description .name{display:block;min-height:50px}
+.order .menu_list.last{padding-bottom:6em}
 .order .menu_dsc,
 .multi_dsc{position:absolute;left:0;right:0;top:100%;margin-top:-2px;padding:1.5rem;border:2px solid #60a224;background-color:#f9f9f9;z-index:1}
 .multi_dsc{margin-left:auto;margin-right:auto}
@@ -161,7 +164,7 @@
 .order .tbl_list .total{background-color:#f9f9f9}
 .order .tbl_list .category-nav{margin-bottom:0}
 .order .tbl_list .category-nav li ul{max-height:10rem}
-.order .tbl_list .btn_del{display:inline-block;width:1.9rem;height:1.9rem;margin:0.115rem 0 0 0.462rem;background:url(../img/order/btn_del.png) no-repeat 0 0;background-size:contain}
+.order .tbl_list .btn_del{display:inline-block;width:1.9rem;height:1.9rem;margin:0.5rem 0 0 1.0rem;background:url(../img/order/btn_del.png) no-repeat 0 0;background-size:contain}
 
 .order .radio_area.horizontal .radio_box + .radio_box{margin-top:1.2rem}
 
@@ -312,6 +315,17 @@ display: none;
 .order .menu_list .thumb .img{max-width:100%}
 
 /**************************************************/
+
+.order_tab_menu{padding:10px 1.5rem;background:#fcfcfc;margin:0 -1.5rem;}
+.fixed .order_tab_menu{position:fixed;top:0;left:0;right:0;z-index:20;box-shadow:0 0 5px #ddd;margin:0;}
+.order_tab_menu ul{overflow:hidden;}
+.order_tab_menu li{padding:2px;float:left;width:33.33%;box-sizing:border-box;}
+.order_tab_menu li a{display:block;background:#fff;text-align:center;line-height:38px;border:1px solid #ccc;}
+.order_tab_menu li a:before{content:'';display:inline-block;height:100%;vertical-align:middle;}
+.order_tab_menu li a span{position:relative;top:-2px;display:inline-block;max-width:90%;line-height:1.1;vertical-align:middle;max-height:2.2em;overflow:hidden;}
+.order_tab_menu li.on a{background:#60a224;border-color:#60a224;color:#fff;}
+
+
 
 @media all and (min-width:700px){
 .order .order_main .img{background-size:contain}

@@ -183,3 +183,15 @@
             location.href="/order/packing/payment";
         }
     }
+    
+    function Message1(){
+    	alert("사용자가 취소하였습니다.");
+    }
+    
+    function Message2(){
+    	alert("30만원 이상 결제를 할 수 없습니다.");
+    }
+    
+    function Message3(){
+    	alert("연동시 Ret_URL을 반드시 설정하셔야 됩니다.");
+    }

@@ -84,7 +84,7 @@ th{font-weight:400}
 div:after,ul:after,ol:after{content:'';display:block;clear:both}
 input:-ms-input-placeholder,textarea:-ms-input-placeholder{color:#888}
 input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#888}
-
+input:focus{border:0;}
 select{height:auto;padding:0.75rem 1.5rem;font-size:1.3rem}
 
 [type=color],
@@ -187,6 +187,7 @@ table .ing_cancel.on {display:inline-block}
 .f-nanum{font-family:'Nanum Myeongjo', serif}
 .fl{float:left}
 .fr{float:right}
+.pc_img{display:none !important;}
 .txt_orange{font-size:1rem;color:#f39700}
 .color-orange{font-weight:400;color:#f39700}
 .btn_area .btn{display:block;text-align:center;height:4rem;line-height:3;font-size:1.3rem}
@@ -280,6 +281,8 @@ table .ing_cancel.on {display:inline-block}
 .color-red{color:#c75050 !important}
 .color-green{color:#60a224 !important}
 .color-bonpoint{color:#60a224}
+.t_yellow{color:#ffad42;}
+.t_green{color:#60a224;}
 
 .bg-primary{background-color:#008cba}
 .bg-gray{background-color:#cac9c5}
@@ -1367,6 +1370,7 @@ margin:0;}
 /* egift카드 등록 팝업 */
 .egift_reg ul li{position: relative;box-sizing:border-box;padding-left:100px;}
 .egift_reg ul li span{position: absolute;left:0;top:0;line-height:3.8rem;font-size:1.3rem;}
+
 
 /*********** [ Plugins ] *************************************************************/
 

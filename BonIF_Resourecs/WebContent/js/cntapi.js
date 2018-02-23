@@ -234,7 +234,7 @@ CNTApi ={
                 retstr = "<span class='check-spen t-green-on'>배달중</span>";
             }else if(statusstr == "P") {
             	 if (typestr == 'R') {
-            		 retstr = "<span class='check-spen t-green-on'>배송중</span>";
+            		 retstr = "<span class='check-spen t-green-on'>배달중</span>";
                  } else {
                 	 retstr = "<span class='check-spen t-green-on'>배달완료</span>";
                  }

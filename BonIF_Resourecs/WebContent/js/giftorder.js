@@ -742,8 +742,18 @@ CNTLib.GiftOrder.prototype ={
 //					frm.submit();
 					
 					var submitYN = false;
-					var point_price = $("#totalpointprice").text().replace(/,/g, "");
-					var total_pay_amount = $("#totalpayamount").text().replace(/,/g, "");
+					var pay_type = $("div.radio_box.on").find(":radio[name='category']").val();
+					var point_price = parseInt($("#totalpointprice").text().replace(/,/g, ""));
+					var coupon_price = $("#totalcouponprice").text() == "" ? 0 : parseInt($("#totalcouponprice").text().replace(/,/g, ""));
+					var egift_price = $("#totalegiftprice").text() == "" ? 0 : parseInt($("#totalegiftprice").text().replace(/,/g, ""));
+					var total_pay_amount = parseInt($("#totalpayamount").text().replace(/,/g, ""));
+					var total_order_amount = parseInt($("#totalorderprice").text().replace(/,/g, ""));
+					
+					if(total_pay_amount == 0 && (coupon_price+point_price+egift_price) != total_order_amount){
+						alert("[결제금액 오류]다시 결제를 진행해주세요.");
+						window.location.reload();
+						return false;
+					}
 					
 					if(point_price > 0){
 						if(confirm("본포인트를 사용하실 경우 당월에 한해 구매취소 또는 환불 신청이 가능합니다.\n포인트를 사용하시겠습니까?")){
@@ -752,17 +762,32 @@ CNTLib.GiftOrder.prototype ={
 							$("input#pointprice").val(0);
 							$("#totalpointprice").text(0);
 							fnCalculate();
+							return false;
 						}
 					}else{
 						submitYN = true;
 					}
 					
+					if(coupon_price > 0 && $("#coupon_id").val() == ""){
+						alert("쿠폰을 다시 선택해주세요.");
+						submitYN = false;
+					}else{
+						submitYN = true;
+					}
+					
 					if(submitYN){
+						$("#egift_no").val($("select#egiftcard").find("option:selected").val());
+						
 						$.ajax({
 							url: "/order/gift/prep_order",
 							data: {
 								cart_id : cart_Id,
+								pay_type : pay_type,
 								point_price : point_price,
+								coupon_id : $("#coupon_id").val(),
+								coupon_price : coupon_price,
+								egift_no : $("#egift_no").val(),
+								egift_price : egift_price,
 								total_pay_amount : total_pay_amount
 							},
 							success: function(result) {
@@ -772,10 +797,10 @@ CNTLib.GiftOrder.prototype ={
 									}else{
 										var $frm = $("form#kcpForm");
 										
-										$frm.find("input#pay_type").val($("div.radio_box.on").find(":radio[name='category']").val());
-//										$frm.find("input#coupon_price").val($("#totalcouponprice").text().replace(/,/g, ""));
-										$frm.find("input#point_price").val($("#totalpointprice").text().replace(/,/g, ""));
-//										$frm.find("input#giftcard_price").val($("#giftcard_price").text().replace(/,/g, ""));
+										$frm.find("input#pay_type").val(pay_type);
+										$frm.find("input#coupon_price").val(coupon_price);
+										$frm.find("input#point_price").val(point_price);
+										$frm.find("input#egift_price").val(egift_price);
 										$frm.find("input#total_pay_amount").val($("#totalpayamount").text().replace(/,/g, ""));
 										$frm.find("input#card_cd").val($("select#card_list").find("option:selected").val());
 										
@@ -939,6 +964,260 @@ CNTLib.GiftOrder.prototype ={
 				$("#cartlist").html(list);
 			}
 			console.log(list);
-		}
+		},
 		//에이스카운터 2017-07-18
+		selectDoMyCouponList : function(){
+			CNTApi.log("selectDoMyCouponList");
+			
+			CNTApi.getUserInfo();
+			
+			var userseq = UserInfo.user_no;
+			var sparts = [];
+			
+			if( userseq == 0 ){
+				alert("로그인 후 확인 하세요.");
+				location.href="/login";
+				return;
+			}
+			
+			$("input[id^='spart_']").each(function(){
+				sparts.push(this.value);
+			});
+			
+			var getCouponList = $(".getCouponList");
+			getCouponList.empty();
+			
+			var param = [];
+			param.push('ex=Coupon');
+			param.push("ac=selectDoMyCouponListByGB");
+			param.push('userseq=' + userseq);
+			param.push('spart='+sparts);
+			CNTApi.log(param.join('&'));
+			var strhtml ="";
+			
+			var self = this;
+			$.ajax({
+				type : 'get',
+				url : "/api.do",
+				data : param.join('&'),
+				dataType : 'text',
+				contentType : 'application/json; charset=UTF-8',
+				error:function(jqXHR, textStatus, errorThrown){
+					CNTApi.log(jqXHR);
+				},
+				success: function(data){
+					CNTApi.log("result");
+					CNTApi.log(data);
+					
+					if(data == null){
+						alert("데이터 조회가 정상적이지 않습니다. 다시 시도해주세요.");
+						return;
+					}
+					var cnt = 0;
+					
+					CNTApi.log(data.length);
+					var ev = JSON.parse(data);
+					
+					if( ev == null || ev.length == 0 )
+					{
+						alert("등록된 쿠폰이 없습니다");
+						return;
+					}
+					
+					if(ev.result == "0"){
+						alert(ev.message);
+						return;
+					}
+
+					if( ev != null && ev.length > 0){
+						strhtml += '<li>';
+						strhtml += '	<p class="radio_box">';
+						strhtml += '		<input type="radio" name="couponradio" id="couponradio_" class="input_check" value="0||">';
+						strhtml += '		<span class="fake"></span>';
+						strhtml += '		<label for="couponradio" class="check"><strong class="font_space">쿠폰 사용 안함</label>';
+						strhtml += '	</p>';
+						strhtml += '</li>';
+						
+						for(i = 0; i < ev.length; i++){
+							
+							if( ev[i].offer_nm != ""){
+								strhtml += '<li>';
+								strhtml += '	<p class="radio_box">';
+								strhtml += '		<input type="radio" name="couponradio" id="couponradio'+i+'" checked="checked" class="input_check" spart="'+ev[i].spart+'" value="'+ev[i].dc_amt+'|'+ev[i].dc_type_cd+'|'+ev[i].bnf_value+'|'+ev[i].offer_type_cd+'">';
+								strhtml += '		<span class="fake"></span>';
+								var range = "원";
+								if( ev[i].dc_type_cd == "02")
+									range = "%";
+		
+								strhtml += '		<label for="couponradio" class="check"><strong class="font_space">'+numberWithCommas(Number(ev[i].dc_amt)) + range +'  할인</strong> - '+ ev[i].offer_nm +'</label>';
+								strhtml += '	</p>';
+								strhtml += '</li>';
+								
+								cnt++;
+							}
+							
+						}
+						getCouponList.append(strhtml);
+						if( cnt == 0){
+							alert("사용가능한 쿠폰이 존재하지 않습니다.");
+							return;
+						}
+						
+						$('#couponDiv li .radio_box').click(function(){
+							$(this).parents().children("li").each(function(index){
+								$(this).find(".radio_box").removeClass("on");
+							});
+							$(this).addClass("on");
+						});	
+
+						var bW = $(window).width();
+						var bH = $(window).height();
+						var elW = $('#pop_couponuse').width();
+						var elH = $('#pop_couponuse').height();
+						var pT = ((bH/2)-(elH/2));
+						var pL = ((bW/2)-(elW/2));
+						$('#pop_couponuse').show();
+						$('#pop_couponuse').css({
+							//top: pT+'px',
+							top: '0',
+							left: pL+'px'
+						});	
+						$('.dimmed').show();
+					}
+				}
+			});
+		},
+		selectDoMyCouponCnt : function(){
+			CNTApi.log("selectDoMyCouponCnt");
+			
+			CNTApi.getUserInfo();
+			
+			var userseq = UserInfo.user_no;
+			var sparts = [];
+			
+			if( userseq == 0 ){
+				alert("로그인 후 확인 하세요.");
+				location.href="/login";
+				return;
+			}
+			
+			$("input[id^='spart_']").each(function(){
+				sparts.push(this.value);
+			});
+			
+			var couponCnt = $(".couponCnt");
+			couponCnt.html(0);
+			
+			var param = [];
+			param.push('ex=Coupon');
+			param.push("ac=selectDoMyCouponListByGB");
+			param.push('userseq=' + userseq);
+			param.push('spart='+sparts);
+			CNTApi.log(param.join('&'));
+			var strhtml ="";
+			
+			var self = this;
+			$.ajax({
+				type : 'get',
+				url : "/api.do",
+				data : param.join('&'),
+				dataType : 'text',
+				contentType : 'application/json; charset=UTF-8',
+				error:function(jqXHR, textStatus, errorThrown){
+					CNTApi.log(jqXHR);
+				},
+				success: function(data){
+					CNTApi.log("result");
+					CNTApi.log(data);
+					
+					if(data == null){
+						alert("데이터 조회가 정상적이지 않습니다. 다시 시도해주세요.");
+						return;
+					}
+					var cnt = 0;
+					
+					CNTApi.log(data.length);
+					var ev = JSON.parse(data);
+					
+					if( ev == null || ev.length == 0 )
+					{
+						return;
+					}
+					
+					if(ev.result == "0"){
+						return;
+					}
+
+					if( ev != null && ev.length > 0){
+						for(i = 0; i < ev.length; i++){
+							
+							if( ev[i].offer_nm != ""){
+								cnt++;
+							}
+							
+						}
+						couponCnt.html(cnt);
+					}
+				}
+			});
+		},
+		setCoupon : function(){
+			CNTApi.log("setCoupon");
+			var dc_amt = $(".dc_amt").html(0);
+			var unit = $(".unit").html("원");
+			var totalcouponprice = $("#totalcouponprice").html(0);
+			var cnt = 0;
+			var couponSeq = $("#couponSeq");
+			
+			$('#couponDiv li').each(function(index){
+				if($(this).find("p").hasClass('on') ){
+
+					var cp_val = $(this).find("p").children("input").val();
+					
+					if( cp_val != ""){
+						var amt = cp_val.split("|")[0];
+						var un = cp_val.split("|")[1];
+						var keywid = cp_val.split("|")[2] + "|" + cp_val.split("|")[3];
+						
+						var totalorderprice = parseInt($("#totalorderprice").text().replace(/,/g, ""));
+						var totalpointprice = parseInt($("#totalpointprice").text().replace(/,/g, ""));
+						var totalegiftprice = $("#totalegiftprice").text() == "" ? 0 : parseInt($("#totalegiftprice").text().replace(/,/g, ""));
+						var totalpayamount = totalorderprice - totalpointprice - totalegiftprice;
+						
+					   	if(totalpayamount - Number(amt) < 0){
+					   		cnt++;
+							alert("최종 결제금액을 초과하였습니다.");
+							return;
+					    }
+						
+						dc_amt.html(numberWithCommas(Number(amt)));
+						unit.html( "원" );
+						
+						if( un == "02"){
+							var totalorderprice = parseInt($("#totalorderprice").text().replace(/,/g, ""));
+							totalcouponprice.html(numberWithCommas(parseInt((totalorderprice / amt) * 100)));
+							dc_amt.html(numberWithCommas(parseInt((totalorderprice * amt) / 100)));
+						}else if( un == "01"){
+							totalcouponprice.html(numberWithCommas(Number(amt)));
+							dc_amt.html(numberWithCommas(Number(amt)));
+						}else{
+							totalcouponprice.html(0);
+							dc_amt.html(0);
+						}
+						
+						$("#coupon_id").val(keywid);
+						
+						fnCalculate();
+						cnt++;
+						
+						$('.dimmed, #pop_couponuse').hide();
+					}
+				}
+			});	
+			
+			if( cnt == 0){
+				alert("선택된 쿠폰이 없습니다.");
+				return;
+			}
+		}
 };

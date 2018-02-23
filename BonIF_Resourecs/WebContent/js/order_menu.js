@@ -70,6 +70,29 @@ $(document).ready(function(){
 		$('.'+pare_id+'').find('#'+selectvalue).hide();
 	});
 	
+	if($('.order_tab_menu li').length > 0){
+		$('.order_tab_menu').on("click","a",function(){
+			var $href = $(this).attr('href'),
+				$top = $($href).offset().top,
+				$height = $('.order_tab_menu_wrap').outerHeight();
+			
+			$('html, body').stop().animate({'scrollTop':$top-$height},500);
+		});
+		
+		$(window).on('scroll',function(){
+			var $tabwrap = $('.order_tab_menu_wrap');
+				$tabwrapTop = $tabwrap.offset().top,
+				$sclTop = $(window).scrollTop();
+			
+			if($tabwrapTop < $sclTop){
+				$tabwrap.addClass('fixed');
+			}else{
+				$tabwrap.removeClass('fixed');
+			}
+		})
+		scrollOn('.tab_section', '.order_tab_menu li', 100)
+	}
+	
 });
 
 function selectBrand(){
@@ -124,10 +147,14 @@ function selectMenu(){
 							var html = "";
 							seq = v.seq;
 							if(part == 1 || part == 5){
-								html+='<li idx="'+k+'" style="cursor: pointer;">'
-								+'<div class="inner">'
+								if(v.soldout == 'y'){
+									html+='<li idx="'+k+'" style="cursor: pointer;" class="sold_out">'
+								}else{
+									html+='<li idx="'+k+'" style="cursor: pointer;">'
+								}
+								html+='<div class="inner">'
 								+'<div class="product">'
-								+'<div class="thumb"><div class="img" style="background-image:url('+v.filename1+');"></div></div>'
+								+'<div class="thumb"><div class="img" style="background-image:url(\''+v.filename1+'\');"></div></div>'
 								+'<div class="description">'
 								+'<strong class="name">'+v.title+'</strong>'
 								+'<p class="f_orange font_space">'+numberWithCommas(v.price)+'원</p>'
@@ -161,7 +188,9 @@ function selectMenu(){
 									if(seq == v.pdid){
 										$.each($.parseJSON(v.oppos1), function(k,v){
 											if(v.master_code != ""){
-											html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
+												if(v.sale == 'y'){
+													html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
+												}
 											}
 										});
 									}
@@ -202,10 +231,14 @@ function selectMenu(){
 								+'</div>'
 								$("#"+v.mpart+"").append(html);
 							}else{
-								html+='<li idx="'+k+'" style="cursor: pointer;">'
-								+'<div class="inner">'
+								if(v.soldout == 'y'){
+									html+='<li idx="'+k+'" style="cursor: pointer;" class="sold_out">'
+								}else{
+									html+='<li idx="'+k+'" style="cursor: pointer;">'
+								}
+								html+='<div class="inner">'
 								+'<div class="product">'
-								+'<div class="thumb"><div class="img" style="background-image:url('+v.filename1+');"></div></div>'
+								+'<div class="thumb"><div class="img" style="background-image:url(\''+v.filename1+'\');"></div></div>'
 								+'<div class="description">'
 								+'<strong class="name">'+v.title+'</strong>'
 								$.each($.parseJSON(data1), function(k,v){
@@ -268,7 +301,9 @@ function selectMenu(){
 										if(v.oplistnum == '1'){
 											$.each($.parseJSON(v.oppos1), function(k,v){
 												if(v.master_code != ""){
-												html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
+													if(v.sale == 'y'){
+														html +='<option value="'+k+'">'+v.topping_name+' +'+numberWithCommas(v.price)+'원</option>'
+													}
 												}
 											});
 										}
@@ -340,6 +375,8 @@ $(document).on("click",".menu_list > li",function(){
 	var classidx = $(this).attr("idx");
 	if($(this).hasClass('on')){
 		$(".menu_list > li").removeClass("on");
+	}else if($(this).hasClass('sold_out')){
+		$(this).removeClass("on");
 	}else{
 		$(".menu_list > li").removeClass("on");
 		$(this).addClass("on");
@@ -808,14 +845,22 @@ function getMenuTitle(){
 			for (var i = 0; i < data.length; i++){
 				var ev = data[i];
 				//alert(ev.menu_name);
-				html +='<div class="header-line mt80"></div>'
+				html +='<div id="'+ev.mpart+'Wrap" class="tab_section mt80"><div class="header-line"></div>'
 			    +'<h2 class="subheader no-gap" id="m01">'+ev.menu_name+'</b></h2>'
 				+'<div class="menu_wrap">'
 				+'<ul class="menu_list mt15" id="'+ev.mpart+'">'
 				+'</ul>'
-				+'</div>'
+				+'</div></div>'
+				
+				if($('.order_tab_menu').length>0){
+					$('.order_tab_menu ul').append('<li><a href="#'+ev.mpart+'Wrap"><span>'+ev.menu_name+'</span></a></li>');
+				}
 			}
 			$(".columns").append(html);
+			if($('.order_tab_menu li').length>0){
+				$('.order_tab_menu_wrap').css({'height':$('.order_tab_menu').outerHeight()}).find('li').first().addClass('on');				
+			}
+			$('.menu_list').last().addClass('last');
 			selectMenu();
 		}
 	});

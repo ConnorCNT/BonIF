@@ -84,59 +84,51 @@ CNTLib.MyCoupon.prototype ={
 				
 				if( ev == null || ev.length == 0 )
 				{
-					sstrhtml += '<div class="box center">';
-					strhtml += '	<div class="coupon">';
-					strhtml += '	</div>';
-					strhtml += '	<div class="use_date_box">';
-					strhtml += '			<span class="text">쿠폰이 존재하지 않습니다.</span>';
-					strhtml += '	</div>';
-					strhtml += '</div>';
+
 				}
 				else if( ev != null && ev.length > 0){
 					for(i = 0; i < ev.length; i++){
 
-						if( ev[i].msg_subject != "" ){
+						if( ev[i].offer_nm != "" ){
 							strhtml += '<div class="box center">';
 							//종료일자 7일전 표기
 							if( parseInt(ev[i].diff_end_dd) <= 7 ){
 							strhtml += '	<span class="fin_label">마감임박</span>';
+							}else if ( ev[i].cpn_status == "U" ){
+								strhtml += '	<span class="fin_label use_end">사용완료</span>';
 							}
 							strhtml += '	<div class="coupon">';
 							if(ev[i].bnf_value == null || ev[i].bnf_value == "")
-							strhtml += '			<a href="javascript:void(0)" class="click_wrap open_popup_btn" onclick="mycoupon.updateCouponMapping(this, '+ev[i].seq+')">';
-							else
-							strhtml += '			<a href="javascript:void(0)" class="click_wrap open_popup_btn" onclick="mycoupon.selectMyCouponDetail('+ev[i].seq+',event)">';
-							
-							strhtml += '				<span class="cp_tit">'+ev[i].msg_subject+'</span><br>';
-							strhtml += '				<span class="cp_promo">';
-							strhtml += '					'+ev[i].msg_sbst;
-							strhtml += '				</span><br>';
-							strhtml += '				<span class="cp_subtxt">';
-							strhtml += '					<span class="color_red">' + ev[i].brd_nm;
-							strhtml += '					<br>[구매시만 사용가능]';
+								strhtml += '			<a href="javascript:void(0)" class="click_wrap open_popup_btn" onclick="mycoupon.updateCouponMapping(this, '+ev[i].seq+')">';
+							else if(ev[i].bnf_value != "" && ev[i].cpn_status != "U")
+								strhtml += '			<a href="javascript:void(0)" class="click_wrap open_popup_btn" onclick="mycoupon.selectMyCouponDetail('+ev[i].seq+',event)">';
+							else if(ev[i].bnf_value != "" && ev[i].cpn_status == "U")
+								strhtml += '			<a href="javascript:void(0)" class="click_wrap open_popup_btn">';
+							strhtml += '				<strong class="coupon_txt">';
+							strhtml += '				<span class="cp_promo">'+ev[i].offer_nm+'</span>';
+							strhtml += '				<span class="cp_tit">';
+							strhtml += '					'+ev[i].cpn_desc;
 							strhtml += '				</span>';
+							strhtml += '				</strong>';
 							strhtml += '			</a>';
 							strhtml += '	</div>';
 							strhtml += '	<div class="use_date_area">';
-							strhtml += '		<p class="text">'+ev[i].cpn_desc+'</p>';
+							strhtml += '		<p class="text">'+ev[i].brd_nm+'</p>';
 							strhtml += '		<P class="date">유효기간 : <span class="font_space">'+CNTApi.getDateFormat(ev[i].aply_start_dd)+'~'+CNTApi.getDateFormat(ev[i].aply_end_dd)+'</span></P>';
 							strhtml += '	</div>';
 							if(ev[i].bnf_value == null || ev[i].bnf_value == "")
 								strhtml += '	<div class="down_area"><a href="javascript:void(0)" class="down_btn" onclick="mycoupon.updateCouponMapping(this, '+ev[i].seq+')">다운로드</a></div>';
-							else
+							else if(ev[i].bnf_value != "" && ev[i].cpn_status != "U")
 								strhtml += '	<div class="down_area"><a href="javascript:void(0)" class="use_btn" onclick="mycoupon.selectMyCouponDetail('+ev[i].seq+',event)">사용하기</a></div>';
+							else if(ev[i].bnf_value != "" && ev[i].cpn_status == "U")
+								strhtml += '	<div class="down_area use_end"><a href="javascript:void(0)" class="use_btn">사용완료</a></div>';
 							strhtml += '</div>';
 							
-							cnt++;
+							if(ev[i].cpn_status != "U")
+								cnt++;
 						}
 						else{
-							strhtml += '<div class="box center">';
-							strhtml += '	<div class="coupon">';
-							strhtml += '	</div>';
-							strhtml += '	<div class="use_date_box">';
-							strhtml += '			<span class="text">쿠폰이 존재하지 않습니다.</span>';
-							strhtml += '	</div>';
-							strhtml += '</div>';
+
 						}
 					}
 				}
@@ -163,7 +155,7 @@ CNTLib.MyCoupon.prototype ={
 		var brandname = $(".brandname");
 		
 		useDate.empty();
-		couponImg.src = "";
+		couponImg.attr("src", "");
 		barCode.src = "";
 		subject.empty();
 		
@@ -203,13 +195,13 @@ CNTLib.MyCoupon.prototype ={
 					return;
 				}
 				else if( ev != null && ev.length > 0){
-					if( ev[0].msg_subject != "" ){
-						useDate.html(CNTApi.getDateFormat(ev[0].aply_start_dd)+' ~ '+CNTApi.getDateFormat(ev[0].aply_end_dd));
-						subject.html(ev[0].msg_sbst);
-						brandname.html(ev[0].brd_nm);
+					if( ev[0].offer_nm != "" ){
+						useDate.html("유효기간 : " + CNTApi.getDateFormat(ev[0].aply_start_dd)+' ~ '+CNTApi.getDateFormat(ev[0].aply_end_dd));
+						subject.html(ev[0].offer_nm);
+						brandname.html(ev[0].cpn_desc);
 						
 						couponImg.attr("src", ev[0].file_path1);
-						barCode.attr("src","../uploaded-files/barcode/"+ev[0].bnf_value+".jpg");
+						barCode.attr("src","/uploaded-files/barcode_mb/"+ev[0].bnf_value+".jpg");
 						
 						e.preventDefault();
 						var bW = $(window).width();
